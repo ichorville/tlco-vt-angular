@@ -31,6 +31,11 @@ export const rootRouterConfig: Routes = [
 				path: 'dashboard',
 				loadChildren: './views/others/others.module#OthersModule',
 				data: { title: 'Dashboard Blank', breadcrumb: 'DASHBOARD' }
+			},
+			{
+				path: 'products',
+				loadChildren: './views/product/product.module#ProductModule',
+				data: { title: 'Products', breadcrumb: 'Product' }
 			}
 		]
 	},

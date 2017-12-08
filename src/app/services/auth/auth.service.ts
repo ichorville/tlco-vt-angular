@@ -4,7 +4,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 @Injectable()
 export class AuthService implements CanActivate {
 	public authToken;
-	private isAuthenticated = false; // Set this value dynamically
+	private isAuthenticated = true; // Set this value dynamically
 
 	constructor (
 		private router: Router
