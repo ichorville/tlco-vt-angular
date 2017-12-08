@@ -15,29 +15,29 @@ import { NavigationService } from "./services/navigation/navigation.service";
 import { AuthService } from './services/auth/auth.service';
 
 export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
+	return new TranslateStaticLoader(http, './assets/i18n', '.json');
 }
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpModule,
-    AppCommonModule,
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
-    }),
-    RouterModule.forRoot(rootRouterConfig, { useHash: false })
-  ],
-  declarations: [AppComponent],
-  providers: [
-    RoutePartsService, 
-    NavigationService, 
-    AuthService,
-    { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
-  ],
-  bootstrap: [AppComponent]
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpModule,
+		AppCommonModule,
+		TranslateModule.forRoot({
+			provide: TranslateLoader,
+			useFactory: (createTranslateLoader),
+			deps: [Http]
+		}),
+		RouterModule.forRoot(rootRouterConfig, { useHash: false })
+	],
+	declarations: [AppComponent],
+	providers: [
+		RoutePartsService,
+		NavigationService,
+		AuthService,
+		{ provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
