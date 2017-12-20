@@ -15,7 +15,6 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { PaginationComponent } from './pagination.component';
-import { PaginationService } from './pagination.service';
 
 @NgModule({
 	imports: [
@@ -34,9 +33,6 @@ import { PaginationService } from './pagination.service';
 	],
 	declarations: [
 		PaginationComponent
-	],
-	providers: [
-		PaginationService
 	],
 	exports: [
 		PaginationComponent
