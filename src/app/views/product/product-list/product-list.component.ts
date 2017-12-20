@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProductService } from '../product.service';
+
 @Component({
 	selector: 'app-product-list',
 	templateUrl: './product-list.component.html',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-	constructor() { }
+	rows: any;
+
+	constructor(
+		private _ps: ProductService
+	) { }
 
 	ngOnInit() {
+		this.rows = this._ps.messages;
 	}
-
 }
