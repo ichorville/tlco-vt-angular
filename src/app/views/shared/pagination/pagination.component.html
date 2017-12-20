@@ -1,3 +1,42 @@
-<p>
-  pagination works!
-</p>
+<mat-toolbar color="primary" class="inbox-toolbar">
+	<span class="example-text">{{ totalRows }} Total</span>
+	<span class="example-spacer"></span>
+	<ul class="pager">
+		<li><!-- display first-most element -->
+			<a
+				[class.disabled]="selectedPage == 1 ? true : null" 
+				(click)="getFirst()">
+				<i class="material-icons">first_page</i>
+			</a>
+		</li>
+		<li><!-- display previous element in line-->
+			<a data-toggle="tab"
+				[class.disabled]="selectedPage == 1 ? true : null" 
+				(click)="previousPage(selectedPage)">
+				<i class="material-icons">chevron_left</i>
+			</a>
+		</li>
+		<!-- select page as default selected page -->
+		<li *ngFor="let page of pages | slice:head:tail">
+			<a data-toggle="tab"
+				[class.selected]="page === selectedPage"
+				(click)="currentData(page)">
+				{{ page }}
+			</a>
+		</li>
+		<li><!-- display next element in line -->
+			<a data-toggle="tab"
+				[class.disabled]="selectedPage == pages.length ? true : null" 
+				(click)="nextPage(selectedPage)">
+				<i class="material-icons">chevron_right</i>
+			</a>
+		</li>
+		<li><!-- display final element-->
+			<a data-toggle="tab"
+				[class.disabled]="selectedPage == pages.length ? true : null" 
+				(click)="getLast()">
+				<i class="material-icons">last_page</i>
+			</a>
+		</li>
+	</ul>
+</mat-toolbar>
