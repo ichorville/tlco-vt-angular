@@ -36,7 +36,7 @@ export class NavigationService {
 			sub: [
 				{ name: 'LIST', state: 'list' },
 				{ name: 'ADD', state: 'add' },
-			]
+			]   
 		}
 	]
 
