@@ -23,7 +23,7 @@
 
 		<div class="inbox-hold">
 			<mat-list class="messages">
-				<mat-list-item *ngFor="let message of messages" class="message-item app-accordion">
+				<mat-list-item *ngFor="let message of filteredRows" class="message-item app-accordion">
 					<div fxLayout="row" fxLayoutAlign="start center" class="message-head">
 						<!-- Single email select and star (show on close) -->
 						<mat-checkbox [(ngModel)]="message.selected" class="hidden-on-open mail-check"></mat-checkbox>
@@ -79,24 +79,13 @@
 				</mat-list-item>
 			</mat-list>
 		</div>
-		<mat-toolbar color="primary" class="inbox-toolbar">
-			<!-- multiple email select and control -->
-			<mat-checkbox (change)="selectToggleAll()" class="inbox-toggle-all mr-2">
-				<small>All</small>
-			</mat-checkbox>
-			<button mat-icon-button matTooltip="Move to trash">
-				<mat-icon>delete</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Mark as important" class="">
-				<mat-icon>folder_special</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Move to archive">
-				<mat-icon>archive</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Report spam">
-				<mat-icon>error</mat-icon>
-			</button>
-		</mat-toolbar>
+		<!-- Pagintion Row -->
+		<app-pagination *ngIf="isInit"
+			[pages]="pages"
+			[totalRows]="rows.length"
+			[selectedPage]="selectedPage"
+			(onPageClick)="paginate($event)">
+		</app-pagination>
 	</div>
 
 </mat-sidenav-container>
