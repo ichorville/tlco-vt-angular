@@ -12,6 +12,8 @@ import {
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { DatatableModule } from '../shared/datatable/datatable.module';
+
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductRoutes } from "./product.routing";
 
@@ -26,7 +28,8 @@ import { ProductRoutes } from "./product.routing";
 		MatCardModule,
 		MatCheckboxModule,
 		MatIconModule,
-		RouterModule.forChild(ProductRoutes)
+		RouterModule.forChild(ProductRoutes),
+		DatatableModule
 	],
 	declarations: [
 		ProductListComponent
