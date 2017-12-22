@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 import { CommonDirectivesModule } from '../../../directives/common/common-directives.module';
 import { PaginationModule } from '../pagination/pagination.module';
+import { SearchModule } from '../search/search.module';
 
 import { DatatableComponent } from './datatable.component';
 import { DatatableService } from './datatable.service';
@@ -40,7 +41,8 @@ import { DatatableService } from './datatable.service';
 		FlexLayoutModule,
 		QuillModule,
 		CommonDirectivesModule,
-		PaginationModule
+		PaginationModule,
+		SearchModule
 	],
 	declarations: [
 		DatatableComponent
