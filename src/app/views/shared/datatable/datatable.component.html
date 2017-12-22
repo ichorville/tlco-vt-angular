@@ -1,6 +1,6 @@
 <mat-sidenav-container>
 
-	<div class="messages-wrap">
+	<div *ngIf="isValid" class="messages-wrap">
 		<!-- right side topbar -->
 		<mat-toolbar color="primary" class="inbox-toolbar">
 			<!-- multiple email select and control -->
@@ -19,6 +19,12 @@
 			<button mat-icon-button matTooltip="Report spam">
 				<mat-icon>error</mat-icon>
 			</button>
+			<span style="flex: 1 1 auto;"></span>
+			<!-- Filter by Columns -->
+			<app-search
+				[terms]="searchResults"
+				(onFilter)="reDraw($event)">
+			</app-search>
 		</mat-toolbar>
 
 		<div class="inbox-hold">
@@ -78,14 +84,20 @@
 					</div>
 				</mat-list-item>
 			</mat-list>
-		</div>
-		<!-- Pagintion Row -->
-		<app-pagination *ngIf="isInit"
-			[pages]="pages"
-			[totalRows]="rows.length"
-			[selectedPage]="selectedPage"
-			(onPageClick)="paginate($event)">
-		</app-pagination>
-	</div>
 
+			<!-- Pagintion Row -->
+			<app-pagination *ngIf="isInit"
+				[pages]="pages"
+				[totalRows]="rows.length"
+				[selectedPage]="selectedPage"
+				(onPageClick)="paginate($event)">
+			</app-pagination>
+
+		</div>
+
+		<mat-toolbar *ngIf="!isValid" color="primary" class="inbox-toolbar">
+			<span>No Matching Records Found</span>
+		</mat-toolbar>	
+			
+	</div>
 </mat-sidenav-container>

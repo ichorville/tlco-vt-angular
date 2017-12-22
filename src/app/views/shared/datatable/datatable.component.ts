@@ -18,10 +18,12 @@ export class DatatableComponent implements OnInit, OnChanges {
 
 	pages: any[];
 	filteredRows: any[];
+	searchResults: any[];
 	totalPaginatedRows: any[];
 
 	selectedPage: number;
 
+	isValid: boolean;
 	isInit: boolean;
 
 	isMobile;
@@ -32,17 +34,20 @@ export class DatatableComponent implements OnInit, OnChanges {
 	constructor(
 		private router: Router,
 		private media: ObservableMedia,
-		public composeDialog: MatDialog,
-		private _ds: DatatableService
-	) {
-		this.pages = [];
+		private _ds: DatatableService,
+		public composeDialog: MatDialog
+	) {		
+		this.isValid = true;
 		this.rows = [];
+		this.pages = [];
 		this.filteredRows = [];
+		this.searchResults = [];
 		this.totalPaginatedRows = [];
 	}
 
 	ngOnInit() {
 		this.inboxSideNavInit();
+		this.searchResults = this.rows;
 		// calculate the no of pagination pages
 		this._ds.getPageCount(this.rows.length).then((pages) => {
 			this.pages = pages;
@@ -69,6 +74,30 @@ export class DatatableComponent implements OnInit, OnChanges {
 					// extract the relevant data set from the paginated data array
 					this.filteredRows = this.totalPaginatedRows[event - 1].items;
 				}
+			}
+		}
+	}
+
+	reDraw(event: any) {
+		if (event != undefined) {
+			if (event == 'NDF') {
+				this.isValid = false;
+			} else {
+				this.isValid = true;
+				this.rows = event;
+
+				// calculate the no of pagination pages
+				this._ds.getPageCount(this.rows.length).then((pages) => {
+					this.pages = pages;
+				});
+				// paginate the whole dataset according to the pagination pages
+				this._ds.paginate(10, this.rows).then((filteredRows) => {
+					this.totalPaginatedRows = filteredRows;
+					this.filteredRows = filteredRows[0].items;
+					this.isInit = true;
+				});
+				// load the first data set hence first selected page
+				this.selectedPage = 1;
 			}
 		}
 	}
