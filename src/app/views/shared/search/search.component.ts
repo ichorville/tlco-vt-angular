@@ -1,15 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { 
+	Component, 
+	OnInit,
+	Input, 
+	Output, 
+	EventEmitter, 
+	OnChanges 
+} from '@angular/core';
+import {
+	debounceTime, 
+	distinctUntilChanged, 
+	switchMap
+} from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { of } from 'rxjs/observable/of';
+import { debounce } from 'rxjs/operator/debounce';
+
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+	selector: 'app-search',
+	templateUrl: './search.component.html',
+	styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+	@Input()
+	terms: any[];
 
-  ngOnInit() {
-  }
+	@Output()
+	onFilter: EventEmitter<any>;
 
+	matches: any[];
+
+	constructor () {
+		this.matches = this.terms;
+		this.onFilter = new EventEmitter<any>();
+	}
+
+	ngOnInit() {
+		this.matches = this.terms;
+	}
+
+	updateFilter(term: string) {
+		if (!term.trim()) {
+			// if no search term, return empty array
+			this.onFilter.emit(this.matches);
+		} else {
+			let arr: any[] = [];
+			// filter from object
+			this.terms.filter((element) => {
+				// filter from object key
+				Object.getOwnPropertyNames(element).filter((match) => {
+					if ((element[match].toLowerCase().indexOf(term.toLowerCase()) > -1)) {
+						// push to array if search condition passes
+						arr.push(element);
+					}
+				});
+			});
+
+			// remove duplicate records
+			this.matches = arr.filter((elem, index, self) => {
+				return index == self.indexOf(elem);
+			});
+
+			if (this.matches.length > 0) {
+				this.onFilter.emit(this.matches);
+			} 
+			if (this.matches.length == 0) {
+				this.onFilter.emit('NDF');
+			}
+		}	
+	}
 }
