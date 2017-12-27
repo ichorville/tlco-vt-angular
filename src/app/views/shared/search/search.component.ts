@@ -6,23 +6,14 @@ import {
 	EventEmitter, 
 	OnChanges 
 } from '@angular/core';
-import {
-	debounceTime, 
-	distinctUntilChanged, 
-	switchMap
-} from 'rxjs/operators';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { of } from 'rxjs/observable/of';
-import { debounce } from 'rxjs/operator/debounce';
-
+import { stringify } from '@angular/core/src/util';
 
 @Component({
 	selector: 'app-search',
 	templateUrl: './search.component.html',
 	styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
 
 	@Input()
 	terms: any[];
@@ -38,23 +29,28 @@ export class SearchComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		
+	}
+
+	ngOnChanges(changes) {
 		this.matches = this.terms;
 	}
 
 	updateFilter(term: string) {
 		if (!term.trim()) {
-			// if no search term, return empty array
+			// if no search term, return array
+			this.matches = this.terms;
 			this.onFilter.emit(this.matches);
 		} else {
 			let arr: any[] = [];
 			// filter from object
-			this.terms.filter((element) => {
+			this.terms.filter((element: object) => {
 				// filter from object key
 				Object.getOwnPropertyNames(element).filter((match) => {
-					if ((element[match].toLowerCase().indexOf(term.toLowerCase()) > -1)) {
+					if (element[match].toString().toLowerCase().indexOf(term.toLowerCase()) > -1) {
 						// push to array if search condition passes
 						arr.push(element);
-					}
+					}			
 				});
 			});
 
