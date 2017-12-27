@@ -4,10 +4,8 @@ import { Injectable } from '@angular/core';
 export class ProductService {
     messages = [
         {
-            sender: {
-                name: 'Henrik Gevorg',
-                photo: 'assets/images/face-1.jpg'
-            },
+            name: 'Henrik Gevorg',
+            photo: 'assets/images/face-1.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Welcome to Angular Egret',
@@ -28,10 +26,8 @@ export class ProductService {
                 Jhone`
         },
         {
-            sender: {
-                name: 'Gevorg Spartak',
-                photo: 'assets/images/face-2.jpg'
-            },
+            name: 'Gevorg Spartak',
+            photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Confirm your email address',
@@ -57,10 +53,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Petros Toros',
-                photo: 'assets/images/face-3.jpg'
-            },
+            name: 'Petros Toros',
+            photo: 'assets/images/face-3.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'New order informations',
@@ -82,10 +76,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Henrik Gevorg',
-                photo: 'assets/images/face-1.jpg'
-            },
+            name: 'Henrik Gevorg',
+            photo: 'assets/images/face-1.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Welcome to Angular Egret',
@@ -106,10 +98,8 @@ export class ProductService {
                 Jhone`
         },
         {
-            sender: {
-                name: 'Gevorg Spartak',
-                photo: 'assets/images/face-2.jpg'
-            },
+            name: 'Gevorg Spartak',
+            photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Confirm your email address',
@@ -135,10 +125,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Petros Toros',
-                photo: 'assets/images/face-4.jpg'
-            },
+            name: 'Petros Toros',
+            photo: 'assets/images/face-4.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'New order informations',
@@ -160,10 +148,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Henrik Gevorg',
-                photo: 'assets/images/face-1.jpg'
-            },
+            name: 'Henrik Gevorg',
+            photo: 'assets/images/face-1.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Welcome to Angular Egret',
@@ -184,10 +170,8 @@ export class ProductService {
                 Jhone`
         },
         {
-            sender: {
-                name: 'Gevorg Spartak',
-                photo: 'assets/images/face-2.jpg'
-            },
+            name: 'Gevorg Spartak',
+            photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Confirm your email address',
@@ -213,10 +197,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Petros Toros',
-                photo: 'assets/images/face-4.jpg'
-            },
+            name: 'Petros Toros',
+            photo: 'assets/images/face-4.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'New order informations',
@@ -238,10 +220,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Gevorg Spartak',
-                photo: 'assets/images/face-2.jpg'
-            },
+            name: 'Gevorg Spartak',
+            photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Confirm your email address',
@@ -267,10 +247,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Petros Toros',
-                photo: 'assets/images/face-4.jpg'
-            },
+            name: 'Petros Toros',
+            photo: 'assets/images/face-4.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'New order informations',
@@ -292,10 +270,8 @@ export class ProductService {
 
         },
         {
-            sender: {
-                name: 'Gevorg Spartak',
-                photo: 'assets/images/face-2.jpg'
-            },
+            name: 'Gevorg Spartak',
+            photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
             selected: false,
             subject: 'Confirm your email address',
