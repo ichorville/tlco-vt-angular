@@ -1,6 +1,6 @@
 <mat-sidenav-container>
 
-	<div *ngIf="isValid" class="messages-wrap">
+	<div class="messages-wrap">
 		<!-- right side topbar -->
 		<mat-toolbar color="primary" class="inbox-toolbar">
 			<!-- multiple email select and control -->
@@ -27,7 +27,7 @@
 			</app-search>
 		</mat-toolbar>
 
-		<div class="inbox-hold">
+		<div *ngIf="isValid" class="inbox-hold">
 			<mat-list class="messages">
 				<mat-list-item *ngFor="let message of filteredRows" class="message-item app-accordion">
 					<div fxLayout="row" fxLayoutAlign="start center" class="message-head">
@@ -35,16 +35,16 @@
 						<mat-checkbox [(ngModel)]="message.selected" class="hidden-on-open mail-check"></mat-checkbox>
 						<!-- Single emial photo and date (show on open) -->
 						<div fxFlex="1 1 auto" fxLayout="row" class="show-on-open mr-1">
-							<img [src]="message.sender.photo" alt="" class="inbox-face mr-1">
+							<img [src]="message.photo" alt="" class="inbox-face mr-1">
 							<div fxLayout="column">
-								<span class="mat-card-title m-0">{{message.sender.name}}</span>
+								<span class="mat-card-title m-0">{{message.name}}</span>
 								<small class="mat-card-subtitle m-0">{{message.date | date}}</small>
 							</div>
 						</div>
 						<!-- Single emial name and subject -->
 						<div appAccordion fxFlex="18 1 auto" fxLayout="row">
 							<!-- (show on close) -->
-							<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{message.sender.name}}</div>
+							<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{message.name}}</div>
 							<!-- (always show) -->
 							<div>{{message.subject}}</div>
 						</div>
