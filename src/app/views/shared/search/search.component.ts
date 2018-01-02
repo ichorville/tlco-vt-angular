@@ -6,7 +6,6 @@ import {
 	EventEmitter, 
 	OnChanges 
 } from '@angular/core';
-import { stringify } from '@angular/core/src/util';
 
 @Component({
 	selector: 'app-search',
@@ -28,9 +27,7 @@ export class SearchComponent implements OnInit, OnChanges {
 		this.onFilter = new EventEmitter<any>();
 	}
 
-	ngOnInit() {
-		
-	}
+	ngOnInit() { }
 
 	ngOnChanges(changes) {
 		this.matches = this.terms;
