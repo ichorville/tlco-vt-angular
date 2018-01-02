@@ -32,11 +32,7 @@ export class NavigationService {
 			type: 'link',
 			tooltip: 'Products',
 			icon: 'dashboard', // change later
-			state: 'products',
-			sub: [
-				{ name: 'LIST', state: 'list' },
-				{ name: 'ADD', state: 'add' },
-			]   
+			state: 'products/list', 
 		}
 	]
 
