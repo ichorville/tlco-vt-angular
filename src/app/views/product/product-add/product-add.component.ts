@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductAddComponent implements OnInit {
 
+  isLinear = false;
+
   constructor() { }
 
   ngOnInit() {
