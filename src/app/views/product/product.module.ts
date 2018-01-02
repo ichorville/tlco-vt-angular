@@ -17,6 +17,8 @@ import { DatatableModule } from '../shared/datatable/datatable.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductRoutes } from "./product.routing";
 import { ProductService } from './product.service';
+import { ProductAddComponent } from './product-add/product-add.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 @NgModule({
 	imports: [
@@ -33,7 +35,9 @@ import { ProductService } from './product.service';
 		DatatableModule
 	],
 	declarations: [
-		ProductListComponent
+		ProductListComponent,
+		ProductAddComponent,
+		ProductEditComponent
 	],
 	providers:[
 		ProductService
