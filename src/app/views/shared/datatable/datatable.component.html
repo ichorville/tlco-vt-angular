@@ -28,6 +28,21 @@
 		</mat-toolbar>
 
 		<div *ngIf="isValid" class="inbox-hold">
+			<!-- Column header -->
+			<mat-toolbar fxHide.lt-sm="true" class="inbox-toolbar" style="border-bottom:1px solid rgba(0, 0, 0, .12);font-size:1.115rem !important;">
+				<div fxFlex="18 1 auto" fxLayout="row">
+					<span style="padding-left:30px;"></span>
+					<!-- (show on close) -->
+					<small class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">Column Header</small>
+					<!-- (always show) -->
+					<small>Column Header</small>
+				</div>
+				<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
+				<!-- Single emial date (show on close) -->
+				<small class="hidden-on-open">Column Header</small>
+				<span style="padding-right:30px;"></span>
+			</mat-toolbar>
+
 			<mat-list class="messages">
 				<mat-list-item *ngFor="let message of filteredRows" class="message-item app-accordion">
 					<div fxLayout="row" fxLayoutAlign="start center" class="message-head">
@@ -37,20 +52,20 @@
 						<div fxFlex="1 1 auto" fxLayout="row" class="show-on-open mr-1">
 							<img [src]="message.photo" alt="" class="inbox-face mr-1">
 							<div fxLayout="column">
-								<span class="mat-card-title m-0">{{message.name}}</span>
-								<small class="mat-card-subtitle m-0">{{message.date | date}}</small>
+								<span class="mat-card-title m-0">{{ message.name }}</span>
+								<small class="mat-card-subtitle m-0">{{ message.date | date }}</small>
 							</div>
 						</div>
 						<!-- Single emial name and subject -->
 						<div appAccordion fxFlex="18 1 auto" fxLayout="row">
 							<!-- (show on close) -->
-							<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{message.name}}</div>
+							<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{ message.name }}</div>
 							<!-- (always show) -->
-							<div>{{message.subject}}</div>
+							<div>{{ message.subject }}</div>
 						</div>
 						<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
 						<!-- Single emial date (show on close) -->
-						<small class="hidden-on-open">{{message.date | date}}</small>
+						<small class="hidden-on-open">{{ message.date | date }}</small>
 						<!-- Single emial top Drop down (show on close) -->
 						<button mat-icon-button [matMenuTriggerFor]="msgMenu" class="hidden-on-open">
 							<mat-icon class="text-muted">more_vert</mat-icon>
