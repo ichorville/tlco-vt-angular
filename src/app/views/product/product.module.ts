@@ -13,6 +13,7 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { DatatableModule } from '../shared/datatable/datatable.module';
+import { ConfigurationModule } from '../shared/configuration/configuration.module';
 
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductRoutes } from "./product.routing";
@@ -32,7 +33,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 		MatCheckboxModule,
 		MatIconModule,
 		RouterModule.forChild(ProductRoutes),
-		DatatableModule
+		DatatableModule,
+		ConfigurationModule
 	],
 	declarations: [
 		ProductListComponent,
