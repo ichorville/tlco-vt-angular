@@ -1,6 +1,60 @@
 <mat-card class="p-0">
 	<mat-horizontal-stepper [linear]="isLinear">
-		<mat-step [stepControl]="firstFormGroup">
+		<div>
+			<mat-step [stepControl]="firstFormGroup">
+				<form [formGroup]="firstFormGroup">
+					<ng-template matStepLabel>Fill out your name</ng-template>
+					<mat-form-field>
+						<input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+					</mat-form-field>
+					<div>
+						<button mat-button matStepperNext>Next</button>
+					</div>
+				</form>
+			</mat-step>
+		</div>
+		<div>
+			<mat-step [stepControl]="secondFormGroup">
+				<form [formGroup]="secondFormGroup">
+					<ng-template matStepLabel>Fill out your address</ng-template>
+					<mat-form-field>
+						<input matInput placeholder="Address" formControlName="secondCtrl" required>
+					</mat-form-field>
+					<div>
+						<button mat-button matStepperPrevious>Back</button>
+						<button mat-button matStepperNext>Next</button>
+					</div>
+				</form>
+			</mat-step>
+		</div>
+		<div>
+			<mat-step>
+				<ng-template matStepLabel>Done</ng-template>
+				You are now done.
+				<div>
+					<button mat-button matStepperPrevious>Back</button>
+				</div>
+			</mat-step>
+		</div>
+		
+	</mat-horizontal-stepper>
+</mat-card>
+<mat-card class="p-0">
+	<mat-horizontal-stepper [linear]="isLinear">
+		<mat-step *ngFor="let step of steps">
+			<ng-template matStepLabel>{{ step.label }}</ng-template>
+			<app-dynamic-form
+				[title]="title" 
+				[formElements]="step.formElements" 
+				[buttonValue]="buttonValue">
+			</app-dynamic-form>
+			<div>
+				<button mat-button matStepperNext>Next</button>
+			</div>
+		</mat-step>
+
+
+		<!-- <mat-step [stepControl]="firstFormGroup">
 			<form [formGroup]="firstFormGroup">
 				<ng-template matStepLabel>Fill out your name</ng-template>
 				<mat-form-field>
@@ -22,7 +76,7 @@
 					<button mat-button matStepperNext>Next</button>
 				</div>
 			</form>
-		</mat-step>
+		</mat-step> -->
 		<mat-step>
 			<ng-template matStepLabel>Done</ng-template>
 			You are now done.

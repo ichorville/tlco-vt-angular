@@ -9,11 +9,20 @@ export class ConfigurationComponent implements OnInit {
 
 	@Input()
 	isLinear: boolean;
+
+	@Input()
+	steps: any[];
 	
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
 
-	constructor(private _formBuilder: FormBuilder) { }
+	form: FormGroup;
+
+	constructor(
+		private _formBuilder: FormBuilder
+	) {
+		this.steps = [];
+	}
 
 	ngOnInit() {
 		this.firstFormGroup = this._formBuilder.group({
