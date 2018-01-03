@@ -1,3 +1,35 @@
-<p>
-  dynamic-form works!
-</p>
+<div *ngIf="mockModel">
+	<form [formGroup]="form">
+			<div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
+				<div class="pb-1">
+					<mat-form-field class="full-width">
+						<input
+						matInput
+						name="username"
+						placeholder="Username (Min Length: 4, Max Length: 9)"
+						value="">
+					</mat-form-field>
+				</div>
+				<div class="pb-1">
+						<mat-form-field class="full-width">
+							<input
+							matInput
+							name="username"
+							placeholder="Username (Min Length: 4, Max Length: 9)"
+							value="">
+						</mat-form-field>
+					</div>
+			</div>
+				<div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+						<div class="pb-1">
+							<mat-form-field class="full-width">
+								<input
+								matInput
+								name="username"
+								placeholder="Username (Min Length: 4, Max Length: 9)"
+								value="">
+							</mat-form-field>
+						</div>
+					</div>
+	</form>
+</div>
