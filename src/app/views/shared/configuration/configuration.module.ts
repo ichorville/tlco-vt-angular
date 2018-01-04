@@ -17,7 +17,7 @@ import {
    } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
-import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
+import { DynamicStepFormModule } from '../dynamic-step-form/dynamic-step-form.module';
 
 import { ConfigurationComponent } from './configuration.component';
 
@@ -40,7 +40,7 @@ import { ConfigurationComponent } from './configuration.component';
 		MatStepperModule,
 		FlexLayoutModule,
 		QuillModule,
-		DynamicFormModule
+		DynamicStepFormModule
 	],
 	declarations: [
 		ConfigurationComponent
