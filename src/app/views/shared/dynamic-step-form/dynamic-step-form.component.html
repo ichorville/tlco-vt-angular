@@ -1,3 +1,9 @@
-<p>
-	dynamic-step-form works!
-</p>
+<mat-card class="p-0">
+	<form [formGroup]="form">
+		<mat-horizontal-stepper *ngIf="entity" formArrayName="formArray" [linear]="!isLinear">
+			<mat-step *ngFor="let formElement of formElements" [formGroupName]="formElement.order - 1" [stepControl]="formArray?.get([formElement.order - 1])">
+				<ng-template matStepLabel>{{ formElement.label }}</ng-template>
+			</mat-step>
+		</mat-horizontal-stepper>
+	</form>
+</mat-card>
