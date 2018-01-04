@@ -37,7 +37,7 @@ export class ProductAddComponent implements OnInit {
 				formElements: this.formElements = [
 					new FormTextbox({
 						key: 'name',
-						label: 'name',
+						label: 'Name',
 						value: '',
 						controlType: 'textbox',
 						type: 'text',
@@ -45,12 +45,12 @@ export class ProductAddComponent implements OnInit {
 						order: 1,
 						placeholder: 'Name',
 						validators: [
-							Validators.required,
+							Validators.required
 						]
 					}),
 					new FormTextbox({
 						key: 'subject',
-						label: 'subject',
+						label: 'Subject',
 						value: '',
 						controlType: 'textbox',
 						type: 'text',
@@ -58,12 +58,12 @@ export class ProductAddComponent implements OnInit {
 						order: 2,
 						placeholder: 'Subject',
 						validators: [
-							Validators.required,
+							Validators.required
 						]
 					}),
 					new FormTextbox({
 						key: 'message',
-						label: 'message',
+						label: 'Message',
 						value: '',
 						controlType: 'textbox',
 						type: 'text',
@@ -71,7 +71,7 @@ export class ProductAddComponent implements OnInit {
 						order: 3,
 						placeholder: 'Message',
 						validators: [
-							Validators.required,
+							Validators.required
 						]
 					})
 				]
