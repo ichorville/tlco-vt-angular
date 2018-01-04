@@ -44,7 +44,6 @@ export class DynamicFormComponent implements OnInit {
 
 	ngOnInit() {
 		this.tempFormElements = this.formElements;
-		console.log(this.formElements);
 		
 		this.formElements.forEach(formElement => {
 			this.mockModel[formElement['key']] = formElement['value'];
