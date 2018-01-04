@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
 
 import { DynamicStepFormComponent } from './dynamic-step-form.component';
+import { DynamicStepFormService } from './dynamic-step-form.service';
 
 @NgModule({
 	imports: [
@@ -38,6 +39,9 @@ import { DynamicStepFormComponent } from './dynamic-step-form.component';
 	],
 	declarations: [
 		DynamicStepFormComponent
+	],
+	providers: [
+		DynamicStepFormService
 	],
 	exports: [
 		DynamicStepFormComponent
