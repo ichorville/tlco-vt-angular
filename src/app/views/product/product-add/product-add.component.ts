@@ -34,6 +34,7 @@ export class ProductAddComponent implements OnInit {
 				label: 'Add Product',
 				isFormGroup: true,
 				order: 1,
+				type: 'form',
 				formElements: this.formElements = [
 					new FormTextbox({
 						key: 'name',
@@ -75,6 +76,12 @@ export class ProductAddComponent implements OnInit {
 						]
 					})
 				]
+			},
+			{
+				label: 'Map Entities',
+				isFormGroup: true,
+				order: 2,
+				type: 'mapping'
 			}
 		]
 	}
