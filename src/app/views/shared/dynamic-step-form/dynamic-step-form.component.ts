@@ -27,12 +27,15 @@ export class DynamicStepFormComponent implements OnInit {
 	@Input()
 	formElements: FormElement<any>[];
 
+	@Output()
+	onFormCompletion: EventEmitter<any>;
+
 	form: FormGroup;
 
 	entity = {};
 
 	tempFormElements: any[];
-
+	
 	/** Returns a FormArray with the name 'formArray'. */
 	get formArray(): AbstractControl | null { return this.form.get('formArray'); }
 
@@ -41,7 +44,7 @@ export class DynamicStepFormComponent implements OnInit {
 		private cd: ChangeDetectorRef
 	) { 
 		this.tempFormElements = [];
-		
+		this.onFormCompletion = new EventEmitter<any>();
 	}
 
 	ngOnInit() {
@@ -53,5 +56,11 @@ export class DynamicStepFormComponent implements OnInit {
 
 		this.form = this._dfs.toFormGroup(this.formElements);
 		console.log(this.form);
+		this.onFormCompletion.emit(this.form);
+	}
+
+	onCompletion() {
+		console.log(this.entity);
+		this.onFormCompletion.emit(this.form);
 	}
 }
