@@ -31,6 +31,7 @@ export class ConfigurationComponent implements OnInit {
 		private _formBuilder: FormBuilder
 	) {
 		this.steps = [];
+//
 	}
 
 	ngOnInit() {
@@ -53,5 +54,10 @@ export class ConfigurationComponent implements OnInit {
 			])
 		});
 		console.log(this.formGroup);
+	}
+
+	unlockStep(event: any) {
+		console.log(event);
+		this.form = event;
 	}
 }

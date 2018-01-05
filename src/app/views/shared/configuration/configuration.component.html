@@ -41,13 +41,17 @@
 </mat-card>
 <mat-card class="p-0">
 	<mat-horizontal-stepper [linear]="isLinear">
-		<mat-step *ngFor="let step of steps">
+		<mat-step *ngFor="let step of steps" [ngSwitch]="step.type">
 			<ng-template matStepLabel>{{ step.label }}</ng-template>
-			<app-dynamic-step-form 
+
+			<app-dynamic-step-form *ngSwitchCase="'form'"
 				[isLinear]="isLinear"
-				[formElements]="step.formElements">
+				[formElements]="step.formElements"
+				(onFormCompletion)="unlockStep($event)">
 			</app-dynamic-step-form>
+
 			<div>
+				<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
 				<button mat-button matStepperNext>Next</button>
 			</div>
 		</mat-step>
