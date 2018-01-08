@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { Http, HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -23,6 +24,8 @@ export function createTranslateLoader(http: Http) {
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpModule,
+		FormsModule, 
+		ReactiveFormsModule,
 		AppCommonModule,
 		TranslateModule.forRoot({
 			provide: TranslateLoader,
