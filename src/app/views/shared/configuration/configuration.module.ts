@@ -20,6 +20,7 @@ import { QuillModule } from 'ngx-quill';
 import { DynamicStepFormModule } from '../dynamic-step-form/dynamic-step-form.module';
 
 import { ConfigurationComponent } from './configuration.component';
+import { ConfigurationService } from './configuration.service';
 
 @NgModule({
 	imports: [
@@ -44,6 +45,9 @@ import { ConfigurationComponent } from './configuration.component';
 	],
 	declarations: [
 		ConfigurationComponent
+	],
+	providers: [
+		ConfigurationService
 	],
 	exports: [
 		ConfigurationComponent

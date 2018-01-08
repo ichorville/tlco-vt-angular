@@ -1,5 +1,5 @@
 <mat-card class="p-0">
-	<mat-horizontal-stepper [linear]="isLinear">
+	<mat-horizontal-stepper [linear]="!isLinear">
 		<div>
 			<mat-step [stepControl]="firstFormGroup">
 				<form [formGroup]="firstFormGroup">
@@ -32,7 +32,7 @@
 				<ng-template matStepLabel>Done</ng-template>
 				You are now done.
 				<div>
-					<button mat-button matStepperPrevious>Back</button>
+					<button (click)="onClick()" mat-button matStepperPrevious>Back</button>
 				</div>
 			</mat-step>
 		</div>
@@ -40,54 +40,38 @@
 	</mat-horizontal-stepper>
 </mat-card>
 <mat-card class="p-0">
-	<mat-horizontal-stepper [linear]="isLinear">
-		<mat-step *ngFor="let step of steps" [ngSwitch]="step.type">
-			<ng-template matStepLabel>{{ step.label }}</ng-template>
-
-			<app-dynamic-step-form *ngSwitchCase="'form'"
-				[isLinear]="isLinear"
-				[formElements]="step.formElements"
-				(onFormCompletion)="unlockStep($event)">
-			</app-dynamic-step-form>
-
-			<div>
-				<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
-				<button mat-button matStepperNext>Next</button>
-			</div>
-		</mat-step>
-
-
-		<!-- <mat-step [stepControl]="firstFormGroup">
-			<form [formGroup]="firstFormGroup">
-				<ng-template matStepLabel>Fill out your name</ng-template>
-				<mat-form-field>
-					<input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-				</mat-form-field>
+	<form [formGroup]="form">
+		<mat-horizontal-stepper formArrayName="formConfigArray" [linear]="!isLinear">
+			<mat-step 
+				*ngFor="let step of steps"
+				[formGroupName]="step.order - 1" 
+				[stepControl]="formConfigArray?.get([step.order - 1])"
+				[ngSwitch]="step.type">
+				<ng-template matStepLabel>{{ step.label }}</ng-template>
+	
+				<app-dynamic-step-form
+					*ngSwitchCase="'form'"
+					[isLinear]="isLinear"
+					[stepOrder]="step.order"
+					[formElements]="step.formElements"
+					(onFormCompletion)="unlockStep($event)">
+				</app-dynamic-step-form>
+	
 				<div>
+					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
 				</div>
-			</form>
-		</mat-step>
-		<mat-step [stepControl]="secondFormGroup">
-			<form [formGroup]="secondFormGroup">
-				<ng-template matStepLabel>Fill out your address</ng-template>
-				<mat-form-field>
-					<input matInput placeholder="Address" formControlName="secondCtrl" required>
-				</mat-form-field>
+			</mat-step>
+	
+			<mat-step>
+				<ng-template matStepLabel>Done</ng-template>
+				You are now done.
 				<div>
-					<button mat-button matStepperPrevious>Back</button>
-					<button mat-button matStepperNext>Next</button>
+					<button (click)="onSumit()" mat-button>Done</button>
 				</div>
-			</form>
-		</mat-step> -->
-		<mat-step>
-			<ng-template matStepLabel>Done</ng-template>
-			You are now done.
-			<div>
-				<button mat-button matStepperPrevious>Back</button>
-			</div>
-		</mat-step>
-	</mat-horizontal-stepper>
+			</mat-step>
+		</mat-horizontal-stepper>
+	</form>
 </mat-card>
 
 <mat-card class="p-0">
