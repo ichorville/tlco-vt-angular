@@ -1,54 +1,23 @@
 <mat-card class="p-0">
-	<mat-horizontal-stepper [linear]="!isLinear">
-		<div>
-			<mat-step [stepControl]="firstFormGroup">
-				<form [formGroup]="firstFormGroup">
-					<ng-template matStepLabel>Fill out your name</ng-template>
-					<mat-form-field>
-						<input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-					</mat-form-field>
-					<div>
-						<button mat-button matStepperNext>Next</button>
-					</div>
-				</form>
-			</mat-step>
-		</div>
-		<div>
-			<mat-step [stepControl]="secondFormGroup">
-				<form [formGroup]="secondFormGroup">
-					<ng-template matStepLabel>Fill out your address</ng-template>
-					<mat-form-field>
-						<input matInput placeholder="Address" formControlName="secondCtrl" required>
-					</mat-form-field>
-					<div>
-						<button mat-button matStepperPrevious>Back</button>
-						<button mat-button matStepperNext>Next</button>
-					</div>
-				</form>
-			</mat-step>
-		</div>
-		<div>
-			<mat-step>
-				<ng-template matStepLabel>Done</ng-template>
-				You are now done.
-				<div>
-					<button (click)="onClick()" mat-button matStepperPrevious>Back</button>
-				</div>
-			</mat-step>
-		</div>
-
-	</mat-horizontal-stepper>
-</mat-card>
-<mat-card class="p-0">
-	<form [formGroup]="form">
+	<form [formGroup]="configForm">
 		<mat-horizontal-stepper formArrayName="formConfigArray" [linear]="!isLinear">
 			<mat-step 
 				*ngFor="let step of steps"
 				[formGroupName]="step.order - 1" 
 				[stepControl]="formConfigArray?.get([step.order - 1])"
+				
+				
 				[ngSwitch]="step.type">
 				<ng-template matStepLabel>{{ step.label }}</ng-template>
-	
+
+				<mat-form-field [attr.hidden]="true">
+					<input matInput placeholder="First Name"
+						[formControlName]="step.order" 
+						[(ngModel)]="configEntity[step.order]"
+						required>
+					<mat-error>This field is required</mat-error>
+				</mat-form-field>
+
 				<app-dynamic-step-form
 					*ngSwitchCase="'form'"
 					[isLinear]="isLinear"

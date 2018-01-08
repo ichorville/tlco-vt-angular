@@ -9,7 +9,7 @@ import { ConfigurationService } from './configuration.service';
 	templateUrl: './configuration.component.html',
 	styleUrls: ['./configuration.component.css']
 })
-export class ConfigurationComponent implements OnInit, OnChanges {
+export class ConfigurationComponent implements OnInit {
 
 	@Input()
 	isLinear: boolean;
@@ -22,7 +22,7 @@ export class ConfigurationComponent implements OnInit, OnChanges {
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
 
-	form: FormGroup;
+	configForm: FormGroup;
 
 	formGroup: FormGroup;
 	isNonEditable = false;
@@ -33,7 +33,7 @@ export class ConfigurationComponent implements OnInit, OnChanges {
 	/** Returns a FormArray with the name 'formArray'. */
 	get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
 
-	get formConfigArray(): AbstractControl | null { return this.form.get('formConfigArray'); }
+	get formConfigArray(): AbstractControl | null { return this.configForm.get('formConfigArray'); }
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -48,14 +48,6 @@ export class ConfigurationComponent implements OnInit, OnChanges {
 			this.configEntity[step['order']] = '';
 		});
 
-		this.firstFormGroup = this._formBuilder.group({
-			firstCtrl: ['', Validators.required]
-		});
-		console.log(this.firstFormGroup);
-		this.secondFormGroup = this._formBuilder.group({
-			secondCtrl: ['', Validators.required]
-		});
-
 		this.formGroup = this._formBuilder.group({
 			formArray: this._formBuilder.array([
 				this._formBuilder.group({
@@ -68,14 +60,10 @@ export class ConfigurationComponent implements OnInit, OnChanges {
 			])
 		});
 
-		this.form = this._cs.toFormGroup(this.steps);
+		this.configForm = this._cs.toFormGroup(this.steps);
 
-		console.log(this.form);
+		console.log(this.configForm);
 		console.log(this.configEntity);
-	}
-
-	ngOnChanges() {
-		console.log(this.firstFormGroup);
 	}
 
 	unlockStep(event: any) {
@@ -94,6 +82,6 @@ export class ConfigurationComponent implements OnInit, OnChanges {
 	}
 
 	onSumit() {
-		console.log(this.form);
+		console.log(this.configForm);
 	}
 }
