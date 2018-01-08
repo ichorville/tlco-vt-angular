@@ -25,13 +25,14 @@
 					<mat-error>This field is required</mat-error>
 				</mat-form-field>
 
+				<!-- Stepper button navigations -->
 				<div>
 					<button *ngIf="formElement.order != 1" mat-button matStepperPrevious type="button">Back</button>
 					<button mat-button matStepperNext type="button">Next</button>
 				</div>
-
 			</mat-step>
 
+			<!-- On form step completion -->
 			<mat-step>
 				<ng-template matStepLabel>Confirm your information</ng-template>
 				Everything seems correct.

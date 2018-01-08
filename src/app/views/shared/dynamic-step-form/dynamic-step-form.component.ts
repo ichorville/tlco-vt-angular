@@ -22,6 +22,9 @@ import { DynamicStepFormService } from './dynamic-step-form.service';
 export class DynamicStepFormComponent implements OnInit {
 
 	@Input()
+	stepOrder: number;
+
+	@Input()
 	isLinear: boolean;
 
 	@Input()
@@ -55,12 +58,14 @@ export class DynamicStepFormComponent implements OnInit {
 		});
 
 		this.form = this._dfs.toFormGroup(this.formElements);
-		console.log(this.form);
-		this.onFormCompletion.emit(this.form);
+
+		this.onCompletion();
 	}
 
 	onCompletion() {
-		console.log(this.entity);
-		this.onFormCompletion.emit(this.form);
+		this.onFormCompletion.emit({
+			key: this.stepOrder,
+			value: this.entity
+		});
 	}
 }
