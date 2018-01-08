@@ -58,8 +58,6 @@ export class DynamicStepFormComponent implements OnInit {
 		});
 
 		this.form = this._dfs.toFormGroup(this.formElements);
-
-		this.onCompletion();
 	}
 
 	onCompletion() {
