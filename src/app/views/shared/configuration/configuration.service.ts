@@ -12,18 +12,19 @@ export class ConfigurationService {
      * This method signature deviates from the dynamic form toFormGroup method where the
      * elements are configured to bind to the behaviour of the mat-step series
      */
-	toFormGroup(stepElements: any[]) {       
-        // create a new formConfigArray of type FormBuilder
+	toStepFormGroup(stepElements: any[]) {       
+        // create a new formConfigArray of type FormArray
         let formConfigArray = this._formBuilder.array([]);
 
         // create a group of form chunks for each step available
         stepElements.forEach(element => {
+            console.log(element);
             formConfigArray.push(this._formBuilder.group({
                 // create custom formControl elements per value of each step
-                [element.order]: ['', Validators.required]
+                [element.order]: [element.label || '', element.validators]
             }))
         });
-
+        console.log(formConfigArray);
         // return customised formConfigArray as new formGroup
         return new FormGroup({formConfigArray});
 	}
