@@ -5,18 +5,8 @@
 				*ngFor="let step of steps"
 				[formGroupName]="step.order - 1" 
 				[stepControl]="formConfigArray?.get([step.order - 1])"
-				
-				
 				[ngSwitch]="step.type">
 				<ng-template matStepLabel>{{ step.label }}</ng-template>
-
-				<mat-form-field [attr.hidden]="true">
-					<input matInput placeholder="First Name"
-						[formControlName]="step.order" 
-						[(ngModel)]="configEntity[step.order]"
-						required>
-					<mat-error>This field is required</mat-error>
-				</mat-form-field>
 
 				<app-dynamic-step-form
 					*ngSwitchCase="'form'"
@@ -25,10 +15,16 @@
 					[formElements]="step.formElements"
 					(onFormCompletion)="unlockStep($event)">
 				</app-dynamic-step-form>
-	
-				<div>
+
+				<div fxLayout="row">
 					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
+					<span style="flex: 1 1 auto;"></span>
+					<mat-checkbox style="padding-top:10px;" 
+						[formControlName]="step.order" 
+						[(ngModel)]="configEntity[step.order]['isCompleted']">
+						Status
+					</mat-checkbox>
 				</div>
 			</mat-step>
 	
@@ -37,50 +33,6 @@
 				You are now done.
 				<div>
 					<button (click)="onSumit()" mat-button>Done</button>
-				</div>
-			</mat-step>
-		</mat-horizontal-stepper>
-	</form>
-</mat-card>
-
-<mat-card class="p-0">
-	<form [formGroup]="formGroup">
-		<mat-horizontal-stepper formArrayName="formArray" [linear]="!isNonLinear">
-			<mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
-				<ng-template matStepLabel>Fill out your name</ng-template>
-				<mat-form-field>
-					<input matInput placeholder="First Name" formControlName="firstNameFormCtrl" required>
-					<mat-error>This field is required</mat-error>
-				</mat-form-field>
-
-				<mat-form-field>
-					<input matInput placeholder="Last Name" formControlName="lastNameFormCtrl" required>
-					<mat-error>This field is required</mat-error>
-				</mat-form-field>
-				<div>
-					<button mat-button matStepperNext type="button">Next</button>
-				</div>
-			</mat-step>
-
-			<mat-step formGroupName="1" [stepControl]="formArray?.get([1])" optional>
-				<ng-template matStepLabel>
-					<div>Fill out your email address</div>
-				</ng-template>
-				<mat-form-field>
-					<input matInput placeholder="Email address" formControlName="emailFormCtrl">
-					<mat-error>The input is invalid.</mat-error>
-				</mat-form-field>
-				<div>
-					<button mat-button matStepperPrevious type="button">Back</button>
-					<button mat-button matStepperNext type="button">Next</button>
-				</div>
-			</mat-step>
-
-			<mat-step>
-				<ng-template matStepLabel>Confirm your information</ng-template>
-				Everything seems correct.
-				<div>
-					<button mat-button>Done</button>
 				</div>
 			</mat-step>
 		</mat-horizontal-stepper>
