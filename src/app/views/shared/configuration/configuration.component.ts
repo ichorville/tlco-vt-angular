@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { ConfigurationService } from './configuration.service';
 
@@ -30,55 +29,43 @@ export class ConfigurationComponent implements OnInit {
 	nameFormGroup: FormGroup;
 	emailFormGroup: FormGroup;
 
-	/** Returns a FormArray with the name 'formArray'. */
-	get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
-
-	get formConfigArray(): AbstractControl | null { return this.configForm.get('formConfigArray'); }
+	get formConfigArray(): AbstractControl | null { 
+		return this.configForm.get('formConfigArray'); 
+	}
 
 	constructor(
 		private _formBuilder: FormBuilder,
-		private _cs: ConfigurationService
+		private _cs: ConfigurationService,
+		private cd: ChangeDetectorRef
 	) {
 		this.steps = [];
 	}
 
 	ngOnInit() {
-
+		
 		this.steps.forEach(step => {
-			this.configEntity[step['order']] = '';
+			this.configEntity[step['order']] = {
+				value: '',
+				isCompleted: ''
+			};
 		});
 
-		this.formGroup = this._formBuilder.group({
-			formArray: this._formBuilder.array([
-				this._formBuilder.group({
-					firstNameFormCtrl: ['', Validators.required],
-					lastNameFormCtrl: ['', Validators.required],
-				}),
-				this._formBuilder.group({
-					emailFormCtrl: ['', Validators.email]
-				}),
-			])
-		});
-
-		this.configForm = this._cs.toFormGroup(this.steps);
+		this.configForm = this._cs.toStepFormGroup(this.steps);
 
 		console.log(this.configForm);
 		console.log(this.configEntity);
 	}
 
 	unlockStep(event: any) {
-		console.log(event);
-		Object.keys(this.configEntity).map(element => {
+		console.log('cme in');
+		Object.keys(this.configEntity).map((element) => {
 			if (element == event['key']) {
-				this.configEntity[element] = event['value'];
+				this.configEntity[element]['value'] = event['value'];
+				this.configEntity[element]['isCompleted'] = true;
 			}
 			return;
 		});
 		console.log(this.configEntity);	
-	}
-
-	onClick() {
-		console.log(this.firstFormGroup);
 	}
 
 	onSumit() {
