@@ -18,13 +18,16 @@ export class ConfigurationService {
 
         // create a group of form chunks for each step available
         stepElements.forEach(element => {
-            console.log(element);
             formConfigArray.push(this._formBuilder.group({
                 // create custom formControl elements per value of each step
-                [element.order]: [element.label || '', element.validators]
+                [element.order]: [element.isCompleted || '', Validators.required]
             }))
         });
+
+        //formConfigArray.controls.forEach(element => element.disable());
+
         console.log(formConfigArray);
+
         // return customised formConfigArray as new formGroup
         return new FormGroup({formConfigArray});
 	}
