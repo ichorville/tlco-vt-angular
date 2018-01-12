@@ -18,16 +18,7 @@ export class ConfigurationComponent implements OnInit {
 
 	configEntity = {};
 
-	firstFormGroup: FormGroup;
-	secondFormGroup: FormGroup;
-
 	configForm: FormGroup;
-
-	formGroup: FormGroup;
-	isNonEditable = false;
-
-	nameFormGroup: FormGroup;
-	emailFormGroup: FormGroup;
 
 	get formConfigArray(): AbstractControl | null { 
 		return this.configForm.get('formConfigArray'); 
@@ -42,7 +33,7 @@ export class ConfigurationComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		
+		// for add
 		this.steps.forEach(step => {
 			this.configEntity[step['order']] = {
 				value: '',
@@ -50,14 +41,17 @@ export class ConfigurationComponent implements OnInit {
 			};
 		});
 
-		this.configForm = this._cs.toStepFormGroup(this.steps);
+		// for edit isCompleted has to be true
 
+		this.configForm = this._cs.toStepFormGroup(this.steps);
+		
 		console.log(this.configForm);
 		console.log(this.configEntity);
+
 	}
 
 	unlockStep(event: any) {
-		console.log('cme in');
+		console.log('came in');
 		Object.keys(this.configEntity).map((element) => {
 			if (element == event['key']) {
 				this.configEntity[element]['value'] = event['value'];
