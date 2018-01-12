@@ -20,8 +20,9 @@
 					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
 					<span style="flex: 1 1 auto;"></span>
-					<mat-checkbox style="padding-top:10px;" 
+					<mat-checkbox style="padding-top:10px;"
 						[formControlName]="step.order" 
+						[disabled]="configForm.invalid"
 						[(ngModel)]="configEntity[step.order]['isCompleted']">
 						Status
 					</mat-checkbox>
