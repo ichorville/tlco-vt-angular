@@ -81,7 +81,10 @@ export class ProductAddComponent implements OnInit {
 				label: 'Map Entities',
 				order: 2,
 				type: 'mapping',
-				isCompleted: false
+				isCompleted: false,
+				formElements: this.formElements = [
+					
+				]
 			}
 		]
 	}
