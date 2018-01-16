@@ -24,10 +24,6 @@ export class ConfigurationService {
             }))
         });
 
-        //formConfigArray.controls.forEach(element => element.disable());
-
-        console.log(formConfigArray);
-
         // return customised formConfigArray as new formGroup
         return new FormGroup({formConfigArray});
 	}
