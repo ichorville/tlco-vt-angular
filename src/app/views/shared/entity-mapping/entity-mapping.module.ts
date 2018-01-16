@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	MatListModule,
 	MatIconModule,
+	MatToolbarModule,
 	MatButtonModule,
 	MatCardModule,
 	MatMenuModule,
@@ -29,6 +30,7 @@ import { EntityMappingComponent } from './entity-mapping.component';
 		ReactiveFormsModule,
 		MatListModule,
 		MatIconModule,
+		MatToolbarModule,
 		MatButtonModule,
 		MatCardModule,
 		MatMenuModule,
