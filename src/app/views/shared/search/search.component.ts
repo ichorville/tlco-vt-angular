@@ -17,6 +17,9 @@ export class SearchComponent implements OnInit, OnChanges {
 	@Input()
 	terms: any[];
 
+	@Input()
+	placeholder: string;
+
 	@Output()
 	onFilter: EventEmitter<any>;
 
