@@ -1,3 +1,66 @@
-<p>
-	entity-mapping works!
-</p>
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex="100" fxFlex.gt-md="300px" fxFlex.gt-sm="50">
+		<mat-card class="profile-sidebar mb-1 pb-0">
+			<div class="propic text-center">
+				<img src="assets/images/sq-face-220.jpg" alt="">
+			</div>
+			<div class="profile-title text-center mb-1">
+				<div class="main-title">Jhone <b>Doe</b></div>
+				<div class="subtitle mb-05">Big Data Expert</div>
+				<div class="text-muted">Hi I'm Jhone, sit amet consectetur adipisicing elit. Aperiam repellendus nam perspiciatis.</div>
+			</div>
+			<div class="profile-actions text-center mb-1">
+				<button mat-raised-button color="primary">Message</button>
+				<button mat-raised-button color="accent">Follow</button>
+			</div>
+			<div class="profile-nav">
+				<mat-nav-list>
+					<mat-list-item routerLink="/profile/overview" routerLinkActive="list-item-active">
+						<mat-icon>home</mat-icon>
+						Overview
+					</mat-list-item>
+					<mat-divider></mat-divider>
+					<mat-list-item routerLink="/profile/settings" routerLinkActive="list-item-active">
+						<mat-icon>settings</mat-icon>
+						Settings
+					</mat-list-item>
+					<mat-divider></mat-divider>
+					<mat-list-item routerLink="/profile/blank" routerLinkActive="list-item-active">
+						<mat-icon>content_paste</mat-icon>
+						Blank
+					</mat-list-item>
+				</mat-nav-list>
+			</div>
+		</mat-card>
+	</div>
+	<div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
+		<div fxLayout="row" fxLayoutWrap="wrap">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+				<mat-card class="default">
+					<mat-card-title>Assigned Tasks</mat-card-title>
+					<span style="padding-left:12px;">
+						<mat-checkbox color="primary" (change)="selectToggleAll()" class="mr-1">
+							<small>All</small>
+						</mat-checkbox>
+						<span style="flex: 1 1 auto;"></span>
+						<!-- Filter by Columns -->
+						<app-search
+							[terms]="tasks"
+							[placeholder]="'Search'">
+						</app-search>
+					</span>
+					<mat-card-content class="p-0">
+						<div class="list-tasktype" style="height:430px;overflow-y:scroll;">
+							<div class="tasktype-item" *ngFor="let t of tasks">
+								<mat-checkbox class="mr-1"></mat-checkbox>
+								<span>{{ t.text }}</span>
+								<span fxFlex></span>
+								<span>{{ t.status }}</span>
+							</div>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+	</div>
+</div>
