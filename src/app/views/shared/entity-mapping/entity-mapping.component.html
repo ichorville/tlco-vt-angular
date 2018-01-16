@@ -39,26 +39,31 @@
 				<mat-card class="default">
 					<mat-card-title>Assigned Tasks</mat-card-title>
 					<span style="padding-left:12px;">
-						<mat-checkbox color="primary" (change)="selectToggleAll()" class="mr-1">
+						<mat-checkbox [(ngModel)]="selectToggleFlag" color="primary" (change)="toggleAll()" class="mr-1">
 							<small>All</small>
 						</mat-checkbox>
 						<span style="flex: 1 1 auto;"></span>
 						<!-- Filter by Columns -->
 						<app-search
-							[terms]="tasks"
-							[placeholder]="'Search'">
+							[terms]="tempArr"
+							[placeholder]="'Search'"
+							(onFilter)="reloadList($event)">
 						</app-search>
+						<span style="color:#3f51b5;">{{ selectedTotal }} Selected</span>
 					</span>
-					<mat-card-content class="p-0">
+					<mat-card-content class="p-0" *ngIf="isValid">
 						<div class="list-tasktype" style="height:430px;overflow-y:scroll;">
 							<div class="tasktype-item" *ngFor="let t of tasks">
-								<mat-checkbox class="mr-1"></mat-checkbox>
+								<mat-checkbox [(ngModel)]="t.status" (change)="toggleEntity()" class="mr-1"></mat-checkbox>
 								<span>{{ t.text }}</span>
 								<span fxFlex></span>
 								<span>{{ t.status }}</span>
 							</div>
 						</div>
 					</mat-card-content>
+					<mat-toolbar *ngIf="!isValid">
+						<span style="font-size:15px;">No Matching Records Found</span>
+					</mat-toolbar>	
 				</mat-card>
 			</div>
 		</div>
