@@ -4,7 +4,7 @@
 }
 :host/deep/.list-tasktype::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: linear-gradient(left, #fff, #e4e4e4);
+    background: linear-gradient(to left, #fff, #e4e4e4);
     border: 1px solid #aaa;
 }
 :host/deep/.list-tasktype::-webkit-scrollbar-track {
