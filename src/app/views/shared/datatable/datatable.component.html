@@ -23,6 +23,7 @@
 			<!-- Filter by Columns -->
 			<app-search
 				[terms]="searchResults"
+				[placeholder]="'Search All Columns'"
 				(onFilter)="reDraw($event)">
 			</app-search>
 		</mat-toolbar>
