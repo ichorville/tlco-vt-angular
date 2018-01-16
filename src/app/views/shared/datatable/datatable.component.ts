@@ -102,11 +102,6 @@ export class DatatableComponent implements OnInit, OnChanges {
 		}
 	}
 
-	selectToggleAll() {
-		this.selectToggleFlag = !this.selectToggleFlag;
-		this.rows.forEach((msg) => { msg.selected = this.selectToggleFlag });
-	}
-
 	inboxSideNavInit() {
 		this.isMobile = this.media.isActive('xs') || this.media.isActive('sm');
 		this.screenSizeWatcher = this.media.subscribe((change: MediaChange) => {
