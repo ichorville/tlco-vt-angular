@@ -1,6 +1,6 @@
 <mat-card class="p-0">
 	<form [formGroup]="configForm">
-		<mat-horizontal-stepper formArrayName="formConfigArray" [linear]="!isLinear">
+		<mat-horizontal-stepper formArrayName="formConfigArray" [linear]="isLinear"> <!-- !isLinear -->
 			<mat-step 
 				*ngFor="let step of steps"
 				[formGroupName]="step.order - 1" 
@@ -15,6 +15,10 @@
 					[formElements]="step.formElements"
 					(onFormCompletion)="unlockStep($event)">
 				</app-dynamic-step-form>
+
+				<app-entity-mapping
+					*ngSwitchCase="'mapping'">
+				</app-entity-mapping>
 
 				<div fxLayout="row">
 					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
