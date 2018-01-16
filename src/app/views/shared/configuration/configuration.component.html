@@ -1,6 +1,6 @@
 <mat-card class="p-0">
 	<form [formGroup]="configForm">
-		<mat-horizontal-stepper formArrayName="formConfigArray" [linear]="isLinear"> <!-- !isLinear -->
+		<mat-horizontal-stepper formArrayName="formConfigArray" [linear]="!isLinear">
 			<mat-step 
 				*ngFor="let step of steps"
 				[formGroupName]="step.order - 1" 
