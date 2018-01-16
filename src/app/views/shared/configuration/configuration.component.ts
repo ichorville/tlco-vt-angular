@@ -40,18 +40,11 @@ export class ConfigurationComponent implements OnInit {
 				isCompleted: ''
 			};
 		});
-
 		// for edit isCompleted has to be true
-
 		this.configForm = this._cs.toStepFormGroup(this.steps);
-		
-		console.log(this.configForm);
-		console.log(this.configEntity);
-
 	}
 
 	unlockStep(event: any) {
-		console.log('came in');
 		Object.keys(this.configEntity).map((element) => {
 			if (element == event['key']) {
 				this.configEntity[element]['value'] = event['value'];
@@ -63,6 +56,7 @@ export class ConfigurationComponent implements OnInit {
 	}
 
 	onSumit() {
+		console.log(this.configEntity);	
 		console.log(this.configForm);
 	}
 }
