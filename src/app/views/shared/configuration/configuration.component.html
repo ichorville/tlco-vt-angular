@@ -17,7 +17,8 @@
 				</app-dynamic-step-form>
 
 				<app-entity-mapping
-					*ngSwitchCase="'mapping'">
+					*ngSwitchCase="'mapping'"
+					[arrayElements]="step.arrayElements">
 				</app-entity-mapping>
 
 				<div fxLayout="row">
