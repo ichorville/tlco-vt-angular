@@ -4,6 +4,8 @@ import { Validators } from '@angular/forms';
 import { FormElement } from '../../shared/form-elements/form-element';
 import { FormTextbox } from '../../shared/form-elements/form-textbox';
 
+import { ProductService } from '../product.service';
+
 @Component({
 	selector: 'app-product-add',
 	templateUrl: './product-add.component.html',
@@ -20,11 +22,20 @@ export class ProductAddComponent implements OnInit {
 	buttonValue: string;
 	formElements: FormElement<any>[];
 
-	constructor() {
+	distributters: any[];
+	asms: any[];
+
+	constructor(
+		private _ps: ProductService
+	) {
 		this.steps = [];
+		this.asms = [];
+		this.distributters = [];
 	}
 
 	ngOnInit() {
+		this.distributters = this._ps.distributors;
+		this.asms = this._ps.asms;
 		this.createSteps();
 	}
 
@@ -82,8 +93,17 @@ export class ProductAddComponent implements OnInit {
 				order: 2,
 				type: 'mapping',
 				isCompleted: false,
-				formElements: this.formElements = [
-					
+				arrayElements: [
+					{
+						key: 'distributors',
+						title: 'Assign Distributors',
+						value: this.distributters
+					},
+					{
+						key: 'AMS',
+						title: 'Assign ASMs',
+						value: this.asms
+					}
 				]
 			}
 		]
