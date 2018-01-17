@@ -20,6 +20,9 @@ export class SearchComponent implements OnInit, OnChanges {
 	@Input()
 	placeholder: string;
 
+	@Input()
+	param: string;
+
 	@Output()
 	onFilter: EventEmitter<any>;
 
@@ -59,11 +62,22 @@ export class SearchComponent implements OnInit, OnChanges {
 				return index == self.indexOf(elem);
 			});
 
-			if (this.matches.length > 0) {
-				this.onFilter.emit(this.matches);
-			} 
-			if (this.matches.length == 0) {
-				this.onFilter.emit('NDF');
+			// if search component have been initialised multiple times in a parent component
+			if (this.param != undefined) {
+				if (this.matches.length == 0) {
+					this.onFilter.emit(['NDF', this.param]);
+				} 
+				if (this.matches.length > 0) {
+					this.onFilter.emit([this.matches, this.param]);
+				} 
+			// if only one search component is present in parent component
+			} else {
+				if (this.matches.length == 0) {
+					this.onFilter.emit('NDF');
+				} 
+				if (this.matches.length > 0) {
+					this.onFilter.emit(this.matches);
+				} 
 			}
 		}	
 	}
