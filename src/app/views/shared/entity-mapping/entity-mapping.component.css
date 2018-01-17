@@ -34,3 +34,7 @@
 .mat-card-title {
     margin-bottom: 0px;
 }
+mat-card-title {
+    padding-bottom :14px;
+    margin-bottom: -14px !important;
+}

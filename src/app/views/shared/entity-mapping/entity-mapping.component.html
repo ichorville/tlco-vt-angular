@@ -35,33 +35,36 @@
 	</div>
 	<div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
 		<div fxLayout="row" fxLayoutWrap="wrap">
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+			<!-- mapEntity[arrNames[mapEntity.index]] -->
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" *ngFor="let mapEntity of mapEntityArray">
 				<mat-card class="default">
-					<mat-card-title>Assigned Tasks</mat-card-title>
-					<span style="padding-left:12px;">
-						<mat-checkbox [(ngModel)]="selectToggleFlag" color="primary" (change)="toggleAll()" class="mr-1">
+					<mat-card-title class="mat-bg-primary m-0">{{ mapEntity.title }}</mat-card-title>
+					<span id="{{ mapEntity.index }}" style="padding-left:12px;">
+						<mat-checkbox [(ngModel)]="mapEntity.selectToggleFlag" color="primary" 
+							(change)="toggleAll(mapEntity.index)" class="mr-1">
 							<small>All</small>
 						</mat-checkbox>
 						<span style="flex: 1 1 auto;"></span>
-						<!-- Filter by Columns -->
+						<!-- Filter array -->
 						<app-search
-							[terms]="tempArr"
+							[terms]="mapEntity.tempArrElement"
 							[placeholder]="'Search'"
+							[param]="mapEntity.index"
 							(onFilter)="reloadList($event)">
 						</app-search>
-						<span style="color:#3f51b5;">{{ selectedTotal }} Selected</span>
+						<span style="color:#3f51b5;">{{ mapEntity.selectedTotal }} Selected</span>
 					</span>
-					<mat-card-content class="p-0" *ngIf="isValid">
+					<mat-card-content class="p-0" *ngIf="mapEntity.isValid">
 						<div class="list-tasktype" style="height:430px;overflow-y:scroll;">
-							<div class="tasktype-item" *ngFor="let t of tasks">
-								<mat-checkbox [(ngModel)]="t.status" (change)="toggleEntity()" class="mr-1"></mat-checkbox>
-								<span>{{ t.text }}</span>
+							<div class="tasktype-item" *ngFor="let arr of mapEntity.arrElement">
+								<mat-checkbox [(ngModel)]="arr.status" (change)="toggleEntity(mapEntity.index)" class="mr-1"></mat-checkbox>
+								<span>{{ arr.text }}</span>
 								<span fxFlex></span>
-								<span>{{ t.status }}</span>
+								<span>{{ arr.status }}</span>
 							</div>
 						</div>
 					</mat-card-content>
-					<mat-toolbar *ngIf="!isValid">
+					<mat-toolbar *ngIf="!mapEntity.isValid">
 						<span style="font-size:15px;">No Matching Records Found</span>
 					</mat-toolbar>	
 				</mat-card>

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { 
+	Component, 
+	OnInit, 
+	Input, 
+	EventEmitter, 
+	Output } from '@angular/core';
 
 @Component({
 	selector: 'app-entity-mapping',
@@ -7,118 +12,82 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntityMappingComponent implements OnInit {
 
+	@Input()
+	arrayElements: any[];
+
 	tasks: any;
 	isValid = true;
 	selectToggleFlag = false;
 	selectedTotal: number;
 
-	tempArr: any[];
+	tempIntparam = 0;
+	tempSeacrVal = [];
+
+	mapEntityArray: any[];
 
 	constructor() {
-		this.tempArr = [];
-		this.tasks = [
-			{
-				text: 'Cranjus McBasketball',
-				status: false
-			}, 
-			{
-				text: 'Minty Cherubandtug',
-				status: false
-			}, 
-			{
-				text: 'Mary Beth BethBeth',
-				status: true
-			}, 
-			{
-				text: 'Helena Bottom-Farter',
-				status: true
-			}, 
-			{
-				text: 'Beefy McWhatnow',
-				status: true
-			},
-			{
-				text: 'Tammy BundleBalls',
-				status: false
-			}, 
-			{
-				text: 'Captain Melvin Seashorse',
-				status: false
-			}, 
-			{
-				text: 'Dr. Shrimp Puerto Rico',
-				status: true
-			}, 
-			{
-				text: 'Simmy Cantstandyourbitz',
-				status: true
-			}, 
-			{
-				text: 'Wandamian Crucifixplate',
-				status: true
-			},
-			{
-				text: 'Denise Fat',
-				status: false
-			}, 
-			{
-				text: 'Jury Prosciutto',
-				status: false
-			}, 
-			{
-				text: 'Rickyticky Bobbywobbin',
-				status: true
-			}, 
-			{
-				text: 'Dungaresse Weatherspoons',
-				status: true
-			}, 
-			{
-				text: 'Eyna Mouthhole',
-				status: true
-			}
-		];
+		this.mapEntityArray = [];
 	 }
 
 	ngOnInit() {
-		this.tempArr = this.tasks;
-		this.calculateTotalSelected();	
+
+		this.arrayElements.forEach((element, index) => {
+
+			this.mapEntityArray.push({
+				index: index,
+				title: element['title'],
+				arrElement: element['value'],
+				tempArrElement: element['value'],
+				isValid: true,
+				selectToggleFlag: false,
+				selectedTotal: 0
+			});
+			this.calculateTotalSelected(index);	
+		});	
 	}
 
-	toggleAll() {
-		// console.log(value);
-		console.log(this.selectToggleFlag);
-		this.tasks.forEach(task => task.status = this.selectToggleFlag);
-		// if (this.selectToggleFlag == true) {
-		// 	this.tasks.forEach(task => task.status = true);
-		// } else if (this.selectToggleFlag == false) {
-		// 	this.tasks.forEach(task => task.status = false);
-		// }
-		this.calculateTotalSelected();
+	toggleAll(index) {
+		this.mapEntityArray[index]['arrElement'].forEach(element => element.status = this.mapEntityArray[index].selectToggleFlag);
+		this.calculateTotalSelected(index);
 	}
 
-	toggleEntity() {
-		if (this.selectToggleFlag == true) {
-			this.selectToggleFlag = !this.selectToggleFlag;
+	toggleEntity(index) {
+		if (this.mapEntityArray[index].selectToggleFlag == true) {
+			this.mapEntityArray[index].selectToggleFlag = !this.mapEntityArray[index].selectToggleFlag;
 		}
-		this.calculateTotalSelected();	
+		this.calculateTotalSelected(index);	
 		return;
 	}
 
-	calculateTotalSelected() {
-		this.selectedTotal = 0;
-		this.tempArr.forEach(task => task.status == true ? this.selectedTotal++ : this.selectedTotal);
-		console.log(this.selectedTotal);
+	calculateTotalSelected(index) {
+		this.mapEntityArray[index].selectedTotal = 0;
+		this.mapEntityArray[index]['tempArrElement'].forEach(element => element.status == true 
+			? this.mapEntityArray[index].selectedTotal++ 
+				: this.mapEntityArray[index].selectedTotal);
 	}
 
 	reloadList(event) {
-		console.log(event);
+		console.log(event[1]);
 		if (event != undefined) {
-			if (event == 'NDF') {
-				this.isValid = false;
+			if (event[0] == 'NDF') {
+				this.mapEntityArray[event[1]].isValid = false;
 			} else {
-				this.isValid = true;
-				this.tasks = event;
+				this.tempIntparam = event[1];
+				this.tempSeacrVal = event;
+				// if (this.tempIntparam > 0) {
+				// 	this.mapEntityArray[this.tempIntparam].isValid = true;
+				// 	this.mapEntityArray[this.tempIntparam]['arrElement'] = event[0];
+				// }
+
+				if (event[1] == undefined) { // wrong implementation change it
+					if (this.tempIntparam > 0) {
+						this.mapEntityArray[this.tempIntparam].isValid = true;
+						this.mapEntityArray[this.tempIntparam]['arrElement'] = event;
+					}
+				} else {
+					this.mapEntityArray[this.tempIntparam].isValid = true;
+					this.mapEntityArray[this.tempIntparam]['arrElement'] = event[0];
+				}
 
 				// // calculate the no of pagination pages
 				// this._ds.getPageCount(this.rows.length).then((pages) => {
