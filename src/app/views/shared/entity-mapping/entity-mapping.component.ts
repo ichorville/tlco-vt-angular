@@ -7,7 +7,7 @@ import {
 	ViewChild } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 import { MediaChange, ObservableMedia } from "@angular/flex-layout";
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-entity-mapping',
@@ -17,12 +17,13 @@ import { MatSidenav, MatDialog } from '@angular/material';
 export class EntityMappingComponent implements OnInit {
 
 	@Input()
+	stepOrder: number;
+
+	@Input()
 	arrayElements: any[];
 
-	tasks: any;
-	isValid = true;
-	selectToggleFlag = false;
-	selectedTotal: number;
+	@Output()
+	onMappingCompletion: EventEmitter<any>;
 
 	tempIntparam = 0;
 	tempSeacrVal = [];
@@ -34,59 +35,31 @@ export class EntityMappingComponent implements OnInit {
 	isSidenavOpen: Boolean = true;
 	@ViewChild(MatSidenav) private sideNave: MatSidenav;
 
-	activeChatUser = {
-		name: 'Gevorg Spartak',
-		photo: 'assets/images/face-2.jpg',
-		isOnline: true,
-		lastMsg: 'Hello!'
-	  };
-	
-	  connectedUsers = [{
-		name: 'Gevorg Spartak',
-		photo: 'assets/images/face-2.jpg',
-		isOnline: true,
-		lastMsg: 'What\'s going!'
-	  }, {
-		name: 'Petros Toros',
-		photo: 'assets/images/face-4.jpg',
-		isOnline: true,
-		lastMsg: 'Send me the stories.'
-	  }, {
-		name: 'Henrik Gevorg',
-		photo: 'assets/images/face-5.jpg',
-		isOnline: false,
-		lastMsg: 'Great work!!'
-	  }, {
-		name: 'Gevorg Spartak',
-		photo: 'assets/images/face-6.jpg',
-		isOnline: false,
-		lastMsg: 'Bye'
-	  }, {
-		name: 'Petros Toros',
-		photo: 'assets/images/face-7.jpg',
-		isOnline: true,
-		lastMsg: 'We\'ll talk later'
-	  }]
+	currentMapping = {};
+	mapEntity = {};
 
 	constructor(
+		private snackBar: MatSnackBar,
 		private media: ObservableMedia
 	) {
 		this.mapEntityArray = [];
+		this.onMappingCompletion = new EventEmitter<any>();
 	}
 
 	ngOnInit() {
 
 		this.arrayElements.forEach((element, index) => {
-
 			this.mapEntityArray.push({
 				index: index,
+				key: element['key'],
 				title: element['title'],
 				arrElement: element['value'],
 				tempArrElement: element['value'],
 				validElements: [],
 				isValid: true,
 				selectToggleFlag: false,
-				selectedTotal: 0
+				selectedTotal: 0,
+				doneSelected: false
 			});
 			this.calculateTotalSelected(index);	
 			this.calculateAssigned(index);
@@ -115,6 +88,7 @@ export class EntityMappingComponent implements OnInit {
 			? this.mapEntityArray[index].selectedTotal++ 
 				: this.mapEntityArray[index].selectedTotal);
 		this.calculateAssigned(index);
+		this.mapEntityArray[index]['doneSelected'] = false;
 	}
 
 	calculateAssigned(index) {
@@ -123,6 +97,14 @@ export class EntityMappingComponent implements OnInit {
 				return true;
 			}
 		});
+	}
+
+	currentMappingCompleted(mappingControl) {
+		if (mappingControl['validElements'].length > 0) {
+			mappingControl['doneSelected'] = true;
+		} else {
+			return this.openSnackBar('Current Mapping Entity Empty');
+		}
 	}
 
 	reloadList(event) {
@@ -152,7 +134,29 @@ export class EntityMappingComponent implements OnInit {
 	}
 
 	changeActiveUser(user) {
-		this.activeChatUser = user;
+		this.currentMapping = user;
+	}
+
+	onMapCompletion() {
+		let arr = [];
+		this.mapEntityArray.forEach(element => {
+			if (element['doneSelected'] == true) {
+				arr.push('Item Completed');
+			} 
+		});
+
+		if (arr.length != this.mapEntityArray.length) {
+			return this.openSnackBar('Entity Mapping Process Incomplete');
+		} else {	
+			this.mapEntityArray.forEach(element => {
+				this.mapEntity[element['key']] = element['validElements']
+			});
+
+			this.onMappingCompletion.emit({
+				key: this.stepOrder,
+				value: this.mapEntity
+			});
+		}
 	}
 
 	updateSidenav() {
@@ -162,6 +166,7 @@ export class EntityMappingComponent implements OnInit {
 			self.sideNave.mode = self.isMobile ? 'over' : 'side';
 		})
 	}
+
 	chatSideBarInit() {
 		this.isMobile = this.media.isActive('xs') || this.media.isActive('sm');
 		this.updateSidenav();
@@ -169,5 +174,9 @@ export class EntityMappingComponent implements OnInit {
 			this.isMobile = (change.mqAlias == 'xs') || (change.mqAlias == 'sm');
 			this.updateSidenav();
 		});
+	}
+
+	openSnackBar(message) {
+		this.snackBar.open(`${ message }`, 'close', { duration: 2000 });
 	}
 }
