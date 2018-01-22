@@ -18,16 +18,18 @@
 
 				<app-entity-mapping
 					*ngSwitchCase="'mapping'"
-					[arrayElements]="step.arrayElements">
+					[stepOrder]="step.order"
+					[arrayElements]="step.arrayElements"
+					(onMappingCompletion)="unlockStep($event)">
 				</app-entity-mapping>
 
 				<div fxLayout="row">
 					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
 					<span style="flex: 1 1 auto;"></span>
-					<mat-checkbox style="padding-top:10px;"
+					<mat-checkbox 
+						style="padding-top:10px;pointer-events:none;color:rgba(0,0,0,.38);"
 						[formControlName]="step.order" 
-						[disabled]="configForm.invalid"
 						[(ngModel)]="configEntity[step.order]['isCompleted']">
 						Status
 					</mat-checkbox>
