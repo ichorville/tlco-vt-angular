@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { FormElement } from '../../shared/form-elements/form-element';
 import { FormTextbox } from '../../shared/form-elements/form-textbox';
@@ -25,9 +26,13 @@ export class ProductAddComponent implements OnInit {
 	distributters: any[];
 	asms: any[];
 
+	url: string;
+
 	constructor(
+		private router: Router,
 		private _ps: ProductService
 	) {
+		this.url = 'products/list';
 		this.steps = [];
 		this.asms = [];
 		this.distributters = [];
@@ -37,6 +42,13 @@ export class ProductAddComponent implements OnInit {
 		this.distributters = this._ps.distributors;
 		this.asms = this._ps.asms;
 		this.createSteps();
+	}
+
+	onSubmit(event) {
+		console.log(event);
+		setTimeout(() => {
+			this.router.navigateByUrl(`${ this.url }`);
+		}, 200);
 	}
 
 	private createSteps() {
