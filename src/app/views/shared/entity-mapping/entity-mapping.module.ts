@@ -17,6 +17,7 @@ import {
 	MatInputModule,
 	MatProgressBarModule,
 	MatSidenavModule,
+	MatSnackBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -44,6 +45,7 @@ import { EntityMappingComponent } from './entity-mapping.component';
 		MatInputModule,
 		MatProgressBarModule,
 		MatSidenavModule,
+		MatSnackBarModule,
 		FlexLayoutModule,
 		QuillModule,
 		SearchModule
