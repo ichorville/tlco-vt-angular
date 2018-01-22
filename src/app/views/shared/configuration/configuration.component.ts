@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { 
+	Component, 
+	OnInit, 
+	Input, 
+	ChangeDetectorRef,
+	Output,
+	EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ConfigurationService } from './configuration.service';
@@ -16,6 +22,9 @@ export class ConfigurationComponent implements OnInit {
 	@Input()
 	steps: any[];
 
+	@Output()
+	onConfigSubmit: EventEmitter<any>;
+
 	configEntity = {};
 
 	configForm: FormGroup;
@@ -30,6 +39,7 @@ export class ConfigurationComponent implements OnInit {
 		private cd: ChangeDetectorRef
 	) {
 		this.steps = [];
+		this.onConfigSubmit = new EventEmitter<any>();
 	}
 
 	ngOnInit() {
@@ -56,7 +66,6 @@ export class ConfigurationComponent implements OnInit {
 	}
 
 	onSumit() {
-		console.log(this.configEntity);	
-		console.log(this.configForm);
+		this.onConfigSubmit.emit(this.configEntity);
 	}
 }
