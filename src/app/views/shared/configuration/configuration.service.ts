@@ -26,5 +26,11 @@ export class ConfigurationService {
 
         // return customised formConfigArray as new formGroup
         return new FormGroup({formConfigArray});
-	}
+    }
+    
+    /**
+     * Main functionality is to configure Form steps with specific names derived
+     * from the from elements provided; in this case the form names are converted to 
+     * FormGroups according to the available steps with element order as the names
+     */
 }
