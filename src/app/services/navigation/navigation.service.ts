@@ -31,7 +31,7 @@ export class NavigationService {
 			name: 'Products',
 			type: 'link',
 			tooltip: 'Products',
-			icon: 'dashboard', // change later
+			icon: 'shopping_cart',
 			state: 'products/list', 
 		}
 	]
