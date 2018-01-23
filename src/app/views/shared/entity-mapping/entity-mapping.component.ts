@@ -154,7 +154,8 @@ export class EntityMappingComponent implements OnInit {
 
 			this.onMappingCompletion.emit({
 				key: this.stepOrder,
-				value: this.mapEntity
+				value: this.mapEntity,
+				completed: true
 			});
 		}
 	}
