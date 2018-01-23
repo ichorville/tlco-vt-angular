@@ -43,14 +43,13 @@ export class ConfigurationComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// for add
+		// step['isCompleted'] only available in edit component
 		this.steps.forEach(step => {
 			this.configEntity[step['order']] = {
 				value: '',
-				isCompleted: ''
+				isCompleted: '' || step['isCompleted']
 			};
 		});
-		// for edit isCompleted has to be true
 		this.configForm = this._cs.toStepFormGroup(this.steps);
 	}
 
@@ -58,8 +57,8 @@ export class ConfigurationComponent implements OnInit {
 		Object.keys(this.configEntity).map((element) => {
 			if (element == event['key']) {
 				this.configEntity[element]['value'] = event['value'];
-				this.configEntity[element]['isCompleted'] = true;
-			}
+				this.configEntity[element]['isCompleted'] = event['completed'];
+			} 
 			return;
 		});
 		console.log(this.configEntity);	
