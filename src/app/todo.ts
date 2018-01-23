@@ -2,9 +2,9 @@
  * This file contains the remaining todos in the application
  * 
  * // Configuration module
- * 1. form-steps binding with checkbox
+ * 1. form-steps binding with checkbox --  leave the current config as it is where derive from add and edit components when configuring
  * 2. data-step binding from one step to another: as in if a step was complete and if the previous step gets incomplete again
- *     the system should block the option to proceed forward where the incomplete step has to be completed first.
+ *     the system should block the option to proceed forward where the incomplete step has to be completed first -- DONE
  * 3. display details from the first form object in the second page, even with rea time editing
  * 
  * // Datatable module
