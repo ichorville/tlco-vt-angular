@@ -57,7 +57,7 @@ export class ProductAddComponent implements OnInit {
 				label: 'Add Product',
 				order: 1,
 				type: 'form',
-				isCompleted: false,
+				// isCompleted: false,
 				formElements: this.formElements = [
 					new FormTextbox({
 						key: 'name',
@@ -78,11 +78,11 @@ export class ProductAddComponent implements OnInit {
 						value: '',
 						controlType: 'textbox',
 						type: 'text',
-						required: true,
+						required: null,
 						order: 2,
 						placeholder: 'Subject',
 						validators: [
-							Validators.required
+							// Validators.required
 						]
 					}),
 					new FormTextbox({
@@ -104,7 +104,7 @@ export class ProductAddComponent implements OnInit {
 				label: 'Map Entities',
 				order: 2,
 				type: 'mapping',
-				isCompleted: false,
+				// isCompleted: false,
 				arrayElements: [
 					{
 						key: 'distributors',
@@ -121,3 +121,9 @@ export class ProductAddComponent implements OnInit {
 		]
 	}
 }
+/**
+ * Form elements
+ * 	if a form element is an optional attribute,
+ * 		then required: false,
+ * 			 validators: []
+ */
