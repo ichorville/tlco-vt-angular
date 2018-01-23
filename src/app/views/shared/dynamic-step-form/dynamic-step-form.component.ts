@@ -34,36 +34,50 @@ export class DynamicStepFormComponent implements OnInit {
 	onFormCompletion: EventEmitter<any>;
 
 	form: FormGroup;
-
 	entity = {};
-
-	tempFormElements: any[];
 	
 	/** Returns a FormArray with the name 'formArray'. */
 	get formArray(): AbstractControl | null { return this.form.get('formArray'); }
 
-	constructor(
+	constructor (
 		private _dfs: DynamicStepFormService,
 		private cd: ChangeDetectorRef
 	) { 
-		this.tempFormElements = [];
 		this.onFormCompletion = new EventEmitter<any>();
 	}
 
-	ngOnInit() {
-		this.tempFormElements = this.formElements;
-		
+	ngOnInit() {	
+		// to bind form values with ngModel
 		this.formElements.forEach(formElement => {
 			this.entity[formElement['key']] = formElement['value'];
 		});
 
+		// convert each foemElement to a FormGroup
 		this.form = this._dfs.toFormGroup(this.formElements);
+
+		// to subscribe in each form value change in order to keep the stepper static
+		this.form.valueChanges.subscribe(data => this.onValueChanged(data));
+		this.onValueChanged();
 	}
 
+	onValueChanged(data?: any) {
+		const control = this.form.get(`formArray`);
+		// if a required field is invalid then emit invalid signal 
+		// whihc will result an incomplete stepper if the stepper was already completed
+		if (control && control.dirty && !control.valid) {
+			this.onFormCompletion.emit({
+				key: this.stepOrder,
+				completed: '' // this isnt false
+			});
+		}
+	}
+
+	// on form submittion emit form values via the bound entity object
 	onCompletion() {
 		this.onFormCompletion.emit({
 			key: this.stepOrder,
-			value: this.entity
+			value: this.entity,
+			completed: true
 		});
 	}
 }
