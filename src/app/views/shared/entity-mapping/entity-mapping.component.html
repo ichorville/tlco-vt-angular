@@ -30,7 +30,7 @@
 					<mat-list-item 
 						*ngFor="let mapEntity of mapEntityArray" 
 						(click)="changeActiveUser(mapEntity)"
-						[class.selected]="currentMapping">
+						[class.selected]="mapEntity === currentMapping">
 						<a mat-list-avatar>
 							<mat-icon *ngIf="!mapEntity.doneSelected">remove</mat-icon>
 							<mat-icon *ngIf="mapEntity.doneSelected" color="primary">done_all</mat-icon>
@@ -69,7 +69,7 @@
 				<div class="conversations-hold">
 					<div fxLayout="row" fxLayoutWrap="wrap">
 						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-							<mat-card class="default">
+							<mat-card class="default drawer">
 								<span id="{{ currentMapping.index }}" style="padding-left:12px;">
 									<mat-checkbox 
 										color="primary" class="mr-1"
@@ -106,7 +106,7 @@
 						</div>
 						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 							<!-- To display list of already mapped entities -->
-							<mat-card class="default">
+							<mat-card class="default drawer">
 								<span style="padding-left:12px;padding-right:12px;padding-top:20px;display:flex;">
 									<span style="color:#3f51b5;">Total Assigned</span>
 									<span fxFlex></span>
