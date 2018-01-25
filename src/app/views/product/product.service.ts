@@ -2,8 +2,31 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProductService {
+
+    add(product: any) {
+        this.messages.push(product);
+    }
+
+    get(id: any): Promise<any> {
+		let product = this.messages.filter((element) => {
+			return element.id == id;
+		});
+		return Promise.resolve(product[0]);
+    }
+    
+    update(product: any): Promise<any> {
+		return Promise.resolve(true).then(() => {
+			let index = this.messages.findIndex((product) => {
+				return product.id === product.id;
+			});
+			this.messages[index].name = product.name;
+			return product;
+		});
+	}
+
     messages = [
-        {
+        {   
+            id: 1,
             name: 'Henrik Gevorg',
             photo: 'assets/images/face-1.jpg',
             date: new Date('10/3/2015'),
@@ -26,6 +49,7 @@ export class ProductService {
                 Jhone`
         },
         {
+            id: 2,
             name: 'Gevorg Spartak',
             photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
@@ -53,6 +77,7 @@ export class ProductService {
 
         },
         {
+            id: 3,
             name: 'Petros Toros',
             photo: 'assets/images/face-3.jpg',
             date: new Date('10/3/2015'),
@@ -76,6 +101,7 @@ export class ProductService {
 
         },
         {
+            id: 4,
             name: 'Henrik Gevorg',
             photo: 'assets/images/face-1.jpg',
             date: new Date('10/3/2015'),
@@ -98,6 +124,7 @@ export class ProductService {
                 Jhone`
         },
         {
+            id: 5,
             name: 'Gevorg Spartak',
             photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
@@ -125,6 +152,7 @@ export class ProductService {
 
         },
         {
+            id: 6,
             name: 'Petros Toros',
             photo: 'assets/images/face-4.jpg',
             date: new Date('10/3/2015'),
@@ -148,6 +176,7 @@ export class ProductService {
 
         },
         {
+            id: 7,
             name: 'Henrik Gevorg',
             photo: 'assets/images/face-1.jpg',
             date: new Date('10/3/2015'),
@@ -170,6 +199,7 @@ export class ProductService {
                 Jhone`
         },
         {
+            id: 8,
             name: 'Gevorg Spartak',
             photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
@@ -197,6 +227,7 @@ export class ProductService {
 
         },
         {
+            id: 9,
             name: 'Petros Toros',
             photo: 'assets/images/face-4.jpg',
             date: new Date('10/3/2015'),
@@ -220,6 +251,7 @@ export class ProductService {
 
         },
         {
+            id: 10,
             name: 'Gevorg Spartak',
             photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
@@ -247,6 +279,7 @@ export class ProductService {
 
         },
         {
+            id: 11,
             name: 'Petros Toros',
             photo: 'assets/images/face-4.jpg',
             date: new Date('10/3/2015'),
@@ -270,6 +303,7 @@ export class ProductService {
 
         },
         {
+            id: 12,
             name: 'Gevorg Spartak',
             photo: 'assets/images/face-2.jpg',
             date: new Date('10/3/2015'),
