@@ -6,7 +6,8 @@ import {
 	ChangeDetectorRef,
 	AfterContentChecked, 
 	EventEmitter, 
-	Output } from '@angular/core';
+	Output, 
+	AfterContentInit } from '@angular/core';
 import { AbstractControl, FormGroup, 
 	FormControl, Validators } from '@angular/forms';
 
@@ -29,6 +30,9 @@ export class DynamicStepFormComponent implements OnInit {
 
 	@Input()
 	formElements: FormElement<any>[];
+
+	@Input()
+	isEdit?: boolean;
 
 	@Output()
 	onFormCompletion: EventEmitter<any>;
@@ -58,6 +62,15 @@ export class DynamicStepFormComponent implements OnInit {
 		// to subscribe in each form value change in order to keep the stepper static
 		this.form.valueChanges.subscribe(data => this.onValueChanged(data));
 		this.onValueChanged();
+	}
+
+	ngAfterContentInit() {
+		if (this.isEdit == true) {
+			// only for edit functionality emit entity model after content load
+			setTimeout(() => {
+				this.onCompletion();
+			}, 100);
+		}
 	}
 
 	onValueChanged(data?: any) {
