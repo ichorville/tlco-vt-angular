@@ -15,7 +15,7 @@ import { ProductService } from '../product.service';
 export class ProductAddComponent implements OnInit {
 
 	// step properties
-	isLinear = false;
+	isLinear = true;
 	steps: any[];
 
 	// form properties
@@ -46,6 +46,9 @@ export class ProductAddComponent implements OnInit {
 
 	onSubmit(event) {
 		console.log(event);
+		let product = event['1']['value'];
+
+		this._ps.add(product)
 		setTimeout(() => {
 			this.router.navigateByUrl(`${ this.url }`);
 		}, 200);
