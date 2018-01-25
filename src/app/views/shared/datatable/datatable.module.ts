@@ -26,6 +26,7 @@ import { DatatableService } from './datatable.service';
 @NgModule({
 	imports: [
 		CommonModule,
+		RouterModule,
 		FormsModule,
 		ReactiveFormsModule,
 		MatIconModule,
