@@ -1,6 +1,6 @@
 <mat-card class="p-0">
 	<form [formGroup]="form">
-		<mat-horizontal-stepper *ngIf="entity" formArrayName="formArray" [linear]="!isLinear">
+		<mat-horizontal-stepper *ngIf="entity" formArrayName="formArray" [linear]="isLinear">
 			
 			<!-- Form step -->
 			<mat-step 
@@ -19,7 +19,7 @@
 						[formControlName]="formElement.key" 
 						[id]="formElement.key" 
 						[type]="formElement.type"
-						[value]=formElement.value 
+						[value]="formElement.value"
 						[required]="formElement.required"
 						[(ngModel)]="entity[formElement['key']]">
 					<mat-error>This field is required</mat-error>
