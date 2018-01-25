@@ -4,8 +4,10 @@ import {
 	Input, 
 	ChangeDetectorRef,
 	Output,
-	EventEmitter } from '@angular/core';
+	EventEmitter,
+	ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material';
 
 import { ConfigurationService } from './configuration.service';
 
@@ -22,12 +24,17 @@ export class ConfigurationComponent implements OnInit {
 	@Input()
 	steps: any[];
 
+	@Input()
+	isEdit?: boolean;
+
 	@Output()
 	onConfigSubmit: EventEmitter<any>;
 
 	configEntity = {};
 
 	configForm: FormGroup;
+
+	@ViewChild('configStepper') stepper: MatStepper;
 
 	get formConfigArray(): AbstractControl | null { 
 		return this.configForm.get('formConfigArray'); 
@@ -43,6 +50,7 @@ export class ConfigurationComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log(this.stepper);
 		// step['isCompleted'] only available in edit component
 		this.steps.forEach(step => {
 			this.configEntity[step['order']] = {
@@ -51,17 +59,31 @@ export class ConfigurationComponent implements OnInit {
 			};
 		});
 		this.configForm = this._cs.toStepFormGroup(this.steps);
+		this.cd.detectChanges();
 	}
 
 	unlockStep(event: any) {
 		Object.keys(this.configEntity).map((element) => {
 			if (element == event['key']) {
+				// bind values to necessary configEntity attribute
 				this.configEntity[element]['value'] = event['value'];
 				this.configEntity[element]['isCompleted'] = event['completed'];
-			} 
-			return;
+
+				console.log(this.stepper._stepHeader);
+				
+				// add css classes on stepper as to indicate completion status of current stepper
+				this.stepper._stepHeader.forEach((stepElement, index) => {
+					if (index == event['key'] - 1) {
+						if (this.configEntity[element]['isCompleted'] == true) {
+							stepElement.nativeElement.style.background = 'lawngreen';
+						} else {
+							stepElement.nativeElement.style.background = '';
+						}
+					}				
+				});
+			}
 		});
-		console.log(this.configEntity);	
+		console.log(this.configEntity);
 	}
 
 	onSumit() {
