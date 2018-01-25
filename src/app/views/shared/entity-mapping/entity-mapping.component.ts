@@ -4,7 +4,8 @@ import {
 	Input, 
 	EventEmitter, 
 	Output,
-	ViewChild } from '@angular/core';
+	ViewChild, 
+	AfterContentInit } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 import { MediaChange, ObservableMedia } from "@angular/flex-layout";
 import { MatSidenav, MatDialog, MatSnackBar } from '@angular/material';
@@ -21,6 +22,9 @@ export class EntityMappingComponent implements OnInit {
 
 	@Input()
 	arrayElements: any[];
+
+	@Input()
+	isEdit?: boolean;
 
 	@Output()
 	onMappingCompletion: EventEmitter<any>;
@@ -69,6 +73,19 @@ export class EntityMappingComponent implements OnInit {
 		this.changeActiveUser(this.mapEntityArray[0]);
 	}
 
+	ngAfterContentInit() {
+		if (this.isEdit == true) {
+			// only for edit functionality emit entity model after content load
+			setTimeout(() => {
+				// this.onCompletion();
+				this.mapEntityArray.forEach(element => {
+					element['doneSelected'] = true;
+				});
+				this.onMapCompletion();
+			}, 100);
+		}
+	}
+
 	toggleAll(index) {
 		this.mapEntityArray[index]['arrElement'].forEach(element => element.status = this.mapEntityArray[index].selectToggleFlag);
 		this.calculateTotalSelected(index);
@@ -79,6 +96,11 @@ export class EntityMappingComponent implements OnInit {
 			this.mapEntityArray[index].selectToggleFlag = !this.mapEntityArray[index].selectToggleFlag;
 		}
 		this.calculateTotalSelected(index);	
+		// since the process is incomplete the form step is incomplete
+		this.onMappingCompletion.emit({
+			key: this.stepOrder,
+			completed: ''
+		});
 		return;
 	}
 
@@ -144,7 +166,7 @@ export class EntityMappingComponent implements OnInit {
 				arr.push('Item Completed');
 			} 
 		});
-
+		console.log(arr.length);
 		if (arr.length != this.mapEntityArray.length) {
 			return this.openSnackBar('Entity Mapping Process Incomplete');
 		} else {	
