@@ -6,6 +6,7 @@
  * 2. data-step binding from one step to another: as in if a step was complete and if the previous step gets incomplete again
  *     the system should block the option to proceed forward where the incomplete step has to be completed first -- DONE
  * 3. display details from the first form object in the second page, even with rea time editing
+ * 4. to add a different color to the selected stepper in mat-steps
  * 
  * // Datatable module
  * 1. column sorting
