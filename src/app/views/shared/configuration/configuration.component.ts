@@ -50,7 +50,6 @@ export class ConfigurationComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.stepper);
 		// step['isCompleted'] only available in edit component
 		this.steps.forEach(step => {
 			this.configEntity[step['order']] = {
@@ -68,8 +67,6 @@ export class ConfigurationComponent implements OnInit {
 				// bind values to necessary configEntity attribute
 				this.configEntity[element]['value'] = event['value'];
 				this.configEntity[element]['isCompleted'] = event['completed'];
-
-				console.log(this.stepper._stepHeader);
 				
 				// add css classes on stepper as to indicate completion status of current stepper
 				this.stepper._stepHeader.forEach((stepElement, index) => {
@@ -83,7 +80,6 @@ export class ConfigurationComponent implements OnInit {
 				});
 			}
 		});
-		console.log(this.configEntity);
 	}
 
 	onSumit() {
