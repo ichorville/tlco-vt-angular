@@ -1,0 +1,54 @@
+:host/deep/.list-tasktype::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+:host/deep/.list-tasktype::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(to left, #fff, #e4e4e4);
+    border: 1px solid #aaa;
+}
+:host/deep/.list-tasktype::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+}
+:host/deep/.list-tasktype::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+/* Child search component */
+:host/deep/app-search .mat-form-field-placeholder {
+    color: #3f51b5 !important;
+    font-size: 15px !important;
+    top: 18px;
+}
+:host/deep/.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder, .mat-form-field-empty.mat-form-field-placeholder {
+    color: transparent;
+}
+:host/deep/.mat-input-underline  {
+    background-color: #F1F1F1 !important;
+}
+:host/deep/app-search mat-form-field {
+    width: 50% !important;
+    height: 35px;
+}
+.mat-card-title {
+    margin-bottom: 0px;
+}
+mat-card-title {
+    padding-bottom :14px;
+    margin-bottom: -14px !important;
+}
+mat-nav-list {
+    padding-top: 0px;
+}
+.selected {
+    background: whitesmoke;
+}
+:host/deep/mat-sidenav-content {
+    background: whitesmoke;
+}
+:host/deep/mat-card.drawer {
+    box-shadow: none !important;
+    background: whitesmoke !important;
+    margin-top: -20px;
+}

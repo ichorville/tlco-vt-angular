@@ -1,0 +1,45 @@
+<mat-card class="p-0">
+	<form [formGroup]="form">
+		<mat-horizontal-stepper *ngIf="entity" formArrayName="formArray" [linear]="isLinear">
+			
+			<!-- Form step -->
+			<mat-step 
+				*ngFor="let formElement of formElements" 
+				[formGroupName]="formElement.order - 1" 
+				[stepControl]="formArray?.get([formElement.order - 1])"
+				[ngSwitch]="formElement.controlType"
+				[optional]="!formElement.required">
+				<ng-template matStepLabel>{{ formElement.label }}</ng-template>
+				
+				<!-- Form textbox -->
+				<mat-form-field *ngSwitchCase="'textbox'">
+					<input matInput 
+						placeholder="{{ formElement.placeholder }}" 
+						autocomplete="off" 
+						[formControlName]="formElement.key" 
+						[id]="formElement.key" 
+						[type]="formElement.type"
+						[value]="formElement.value"
+						[required]="formElement.required"
+						[(ngModel)]="entity[formElement['key']]">
+					<mat-error>This field is required</mat-error>
+				</mat-form-field>
+
+				<!-- Stepper button navigations -->
+				<div>
+					<button *ngIf="formElement.order != 1" mat-button matStepperPrevious type="button">Back</button>
+					<button mat-button matStepperNext type="button">Next</button>
+				</div>
+			</mat-step>
+
+			<!-- On form step completion -->
+			<mat-step>
+				<ng-template matStepLabel>Confirm your information</ng-template>
+				Everything seems correct.
+				<div>
+					<button (click)="onCompletion()" mat-button>Done</button>
+				</div>
+			</mat-step>
+		</mat-horizontal-stepper>
+	</form>
+</mat-card>

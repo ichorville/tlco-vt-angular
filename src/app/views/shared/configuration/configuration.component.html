@@ -1,0 +1,54 @@
+<mat-card class="p-0">
+	<form [formGroup]="configForm">
+		<mat-horizontal-stepper 
+			#configStepper
+			formArrayName="formConfigArray" 
+			[linear]="isLinear">
+
+			<mat-step
+				*ngFor="let step of steps"
+				[formGroupName]="step.order - 1" 
+				[stepControl]="formConfigArray?.get([step.order - 1])"
+				[ngSwitch]="step.type">
+				<ng-template matStepLabel>{{ step.label }}</ng-template>
+
+				<app-dynamic-step-form
+					*ngSwitchCase="'form'"
+					[isEdit]="isEdit"
+					[isLinear]="isLinear"
+					[stepOrder]="step.order"
+					[formElements]="step.formElements"
+					(onFormCompletion)="unlockStep($event)">
+				</app-dynamic-step-form>
+
+				<app-entity-mapping
+					*ngSwitchCase="'mapping'"
+					[isEdit]="isEdit"
+					[stepOrder]="step.order"
+					[arrayElements]="step.arrayElements"
+					(onMappingCompletion)="unlockStep($event)">
+				</app-entity-mapping>
+
+				<div fxLayout="row">
+					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
+					<button mat-button matStepperNext>Next</button>
+					<span style="flex: 1 1 auto;"></span>
+					<mat-checkbox hidden
+						[formControlName]="step.order" 
+						[(ngModel)]="configEntity[step.order]['isCompleted']">
+						Status
+					</mat-checkbox>
+				</div>
+			</mat-step>
+	
+			<mat-step>
+				<ng-template matStepLabel>Done</ng-template>
+				You are now done.
+				<div>
+					<button (click)="onSumit()" mat-button>Done</button>
+				</div>
+			</mat-step>
+
+		</mat-horizontal-stepper>
+	</form>
+</mat-card>

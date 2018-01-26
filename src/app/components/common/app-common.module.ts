@@ -5,22 +5,22 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from 'ng2-translate/ng2-translate';
-import { 
-  MatSidenavModule,
-  MatListModule,
-  MatTooltipModule,
-  MatOptionModule,
-  MatSelectModule,
-  MatMenuModule,
-  MatSnackBarModule,
-  MatGridListModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatButtonModule,
-  MatRadioModule,
-  MatCheckboxModule,
-  MatCardModule,
-  MatProgressSpinnerModule
+import {
+	MatSidenavModule,
+	MatListModule,
+	MatTooltipModule,
+	MatOptionModule,
+	MatSelectModule,
+	MatMenuModule,
+	MatSnackBarModule,
+	MatGridListModule,
+	MatToolbarModule,
+	MatIconModule,
+	MatButtonModule,
+	MatRadioModule,
+	MatCheckboxModule,
+	MatCardModule,
+	MatProgressSpinnerModule
 } from '@angular/material';
 import { TopbarComponent } from './topbar/topbar.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -32,39 +32,39 @@ import { ThemeService } from '../../services/theme/theme.service';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    BrowserModule,
-    RouterModule,
-    FlexLayoutModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatTooltipModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    CommonDirectivesModule,
-    TranslateModule
-  ],
-  declarations: [
-    AdminLayoutComponent,
-    AuthLayoutComponent,
-    TopbarComponent, 
-    NavigationComponent, 
-    NotificationsComponent, 
-    BreadcrumbComponent
-  ],
-  providers: [ThemeService],
-  exports: []
+	imports: [
+		CommonModule,
+		FormsModule,
+		BrowserModule,
+		RouterModule,
+		FlexLayoutModule,
+		MatSidenavModule,
+		MatIconModule,
+		MatListModule,
+		MatTooltipModule,
+		MatOptionModule,
+		MatSelectModule,
+		MatMenuModule,
+		MatSnackBarModule,
+		MatGridListModule,
+		MatToolbarModule,
+		MatButtonModule,
+		MatRadioModule,
+		MatCheckboxModule,
+		MatCardModule,
+		MatProgressSpinnerModule,
+		CommonDirectivesModule,
+		TranslateModule
+	],
+	declarations: [
+		AdminLayoutComponent,
+		AuthLayoutComponent,
+		TopbarComponent,
+		NavigationComponent,
+		NotificationsComponent,
+		BreadcrumbComponent
+	],
+	providers: [ThemeService],
+	exports: []
 })
-export class AppCommonModule {}
+export class AppCommonModule { }

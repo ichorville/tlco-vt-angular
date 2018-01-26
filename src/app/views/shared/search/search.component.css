@@ -1,0 +1,11 @@
+:host/deep/.mat-form-field-placeholder {
+    color: white;
+    font-size: smaller !important;
+    top: 32px;
+}
+:host/deep/.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder, .mat-form-field-empty.mat-form-field-placeholder {
+    color: transparent;
+}
+:host/deep/.mat-input-underline  {
+    background-color: #F1F1F1 !important;
+}

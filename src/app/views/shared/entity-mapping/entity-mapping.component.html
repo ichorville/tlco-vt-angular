@@ -1,0 +1,133 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex="100" fxFlex.gt-md="300px" fxFlex.gt-sm="50">
+		<!-- Product Portfolio -->
+		<mat-card class="profile-sidebar mb-1 pb-0">
+			<div class="propic text-center">
+				<mat-icon style="font-size:75px;width:75px;">shopping_cart</mat-icon>
+			</div>
+			<div class="profile-title text-center mb-1">
+				<div class="main-title">Jhone
+					<b>Doe</b>
+				</div>
+				<div class="subtitle mb-05">Big Data Expert</div>
+				<div class="text-muted">Configure Entity mappings for seledted Item</div>
+			</div>
+			<div class="profile-actions text-center mb-1">
+				<button mat-raised-button color="primary" 
+					(click)="onMapCompletion()">Confirm Mappings</button>
+			</div>
+			<div class="profile-nav">
+				<!-- For later use -->
+			</div>
+		</mat-card>
+	</div>
+	<div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
+		<mat-sidenav-container>
+			<!-- Left sidebar -->
+			<mat-sidenav style="width:15rem;" #mappingSidebar [opened]="isSidenavOpen" mode="side">
+				<!-- Left side mapping list -->
+				<mat-nav-list class="inbox-nav-list" role="list">
+					<mat-list-item 
+						*ngFor="let mapEntity of mapEntityArray" 
+						(click)="changeActiveUser(mapEntity)"
+						[class.selected]="mapEntity === currentMapping">
+						<a mat-list-avatar>
+							<mat-icon *ngIf="!mapEntity.doneSelected">remove</mat-icon>
+							<mat-icon *ngIf="mapEntity.doneSelected" color="primary">done_all</mat-icon>
+						</a>
+						<h6 matLine>{{ mapEntity.title }}</h6>
+						<p matLine class="text-muted">{{ mapEntity.selectedTotal }} Selected</p>
+					</mat-list-item>
+				</mat-nav-list>
+			</mat-sidenav>
+
+			<!-- Right side -->
+			<div class="chats-wrap">
+				<!-- Right side topbar -->
+				<mat-toolbar class="chat-toolbar">
+					<!-- sidebar toggle button -->
+					<button mat-icon-button [style.alignSelf]="'center'" class="mr-1" (click)="mappingSidebar.toggle()">
+						<mat-icon>compare_arrows</mat-icon>
+					</button>
+
+					<!-- Selected Mapping Control -->
+					<div class="active-chat-user" fxLayout="row" fxLayoutAlign="start center">
+						<div fxLayout="column">
+							<h6 class="m-0 font-normal fz-1">{{ currentMapping.title }}</h6>
+						</div>
+					</div>
+					<span style="flex: 1 1 auto;"></span>
+					<!-- To save current map control as completed -->
+					<button mat-icon-button color="accent" 
+						[style.alignSelf]="'center'" class="mr-1" 
+						(click)="currentMappingCompleted(currentMapping)">
+						<mat-icon>done</mat-icon>
+					</button>
+				</mat-toolbar>
+
+				<!-- Main Mapping View -->
+				<div class="conversations-hold">
+					<div fxLayout="row" fxLayoutWrap="wrap">
+						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+							<mat-card class="default drawer">
+								<span id="{{ currentMapping.index }}" style="padding-left:12px;">
+									<mat-checkbox 
+										color="primary" class="mr-1"
+										[(ngModel)]="currentMapping.selectToggleFlag" 
+										(change)="toggleAll(currentMapping.index)">
+										<small>All</small>
+									</mat-checkbox>
+									<span style="flex: 1 1 auto;"></span>
+									<!-- Search current list -->
+									<app-search 
+										[terms]="currentMapping.tempArrElement" 
+										[placeholder]="'Search'" 
+										(onFilter)="reloadList($event)">
+									</app-search>
+								</span>
+								<!-- List of Entites to be mapped -->
+								<mat-card-content class="p-0" *ngIf="currentMapping.isValid">
+									<div class="list-tasktype" style="height:430px;overflow-y:scroll;">
+										<div class="tasktype-item" *ngFor="let arr of currentMapping.arrElement">
+											<mat-checkbox 
+												[(ngModel)]="arr.status" class="mr-1"
+												(change)="toggleEntity(currentMapping.index)"></mat-checkbox>
+											<span>{{ arr.text }}</span>
+											<span fxFlex></span>
+											<span>{{ arr.status }}</span>
+										</div>
+									</div>
+								</mat-card-content>
+								<mat-toolbar *ngIf="!currentMapping.isValid">
+									<span style="font-size:15px;">No Matching Records Found</span>
+								</mat-toolbar>
+							</mat-card>
+						</div>
+						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+							<!-- To display list of already mapped entities -->
+							<mat-card class="default drawer">
+								<span style="padding-left:12px;padding-right:12px;padding-top:20px;display:flex;">
+									<span style="color:#3f51b5;">Total Assigned</span>
+									<span fxFlex></span>
+									<span style="color:#3f51b5;">{{ currentMapping.selectedTotal }} Selected</span>
+								</span>
+								<mat-card-content class="p-0" style="margin-top:5px;"  *ngIf="currentMapping.validElements.length > 0">
+									<div class="list-tasktype" style="height:430px;overflow-y:scroll;">
+										<div class="tasktype-item" *ngFor="let element of currentMapping.validElements">
+											<span>{{ element.text }}</span>
+											<span fxFlex></span>
+											<span>{{ element.status }}</span>
+										</div>
+									</div>
+								</mat-card-content>
+								<mat-toolbar *ngIf="currentMapping.validElements.length == 0">
+									<span style="font-size:15px;">No Records Mapped</span>
+								</mat-toolbar>
+							</mat-card>
+						</div>
+					</div>
+				</div>
+			</div>
+		</mat-sidenav-container>
+	</div>
+</div>
