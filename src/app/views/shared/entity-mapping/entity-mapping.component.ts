@@ -51,7 +51,6 @@ export class EntityMappingComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		this.arrayElements.forEach((element, index) => {
 			this.mapEntityArray.push({
 				index: index,
@@ -114,7 +113,7 @@ export class EntityMappingComponent implements OnInit {
 	}
 
 	calculateAssigned(index) {
-		this.mapEntityArray[index]['validElements'] = this.mapEntityArray[index]['arrElement'].filter(function (element) {
+		this.mapEntityArray[index]['validElements'] = this.mapEntityArray[index]['tempArrElement'].filter(function (element) {
 			if (element['status'] == true) {
 				return true;
 			}
@@ -130,27 +129,12 @@ export class EntityMappingComponent implements OnInit {
 	}
 
 	reloadList(event) {
-		console.log(event[1]);
 		if (event != undefined) {
-			if (event[0] == 'NDF') {
-				this.mapEntityArray[event[1]].isValid = false;
+			if (event == 'NDF') {
+				this.mapEntityArray[this.currentMapping['index']].isValid = false;
 			} else {
-				this.tempIntparam = event[1];
-				this.tempSeacrVal = event;
-				// if (this.tempIntparam > 0) {
-				// 	this.mapEntityArray[this.tempIntparam].isValid = true;
-				// 	this.mapEntityArray[this.tempIntparam]['arrElement'] = event[0];
-				// }
-
-				if (event[1] == undefined) { // wrong implementation change it
-					if (this.tempIntparam > 0) {
-						this.mapEntityArray[this.tempIntparam].isValid = true;
-						this.mapEntityArray[this.tempIntparam]['arrElement'] = event;
-					}
-				} else {
-					this.mapEntityArray[this.tempIntparam].isValid = true;
-					this.mapEntityArray[this.tempIntparam]['arrElement'] = event[0];
-				}
+				this.mapEntityArray[this.currentMapping['index']].isValid = true;
+				this.mapEntityArray[this.currentMapping['index']]['arrElement'] = event;
 			}
 		}
 	}
