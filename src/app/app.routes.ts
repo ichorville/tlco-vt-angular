@@ -36,6 +36,11 @@ export const rootRouterConfig: Routes = [
 				path: 'products',
 				loadChildren: './views/product/product.module#ProductModule',
 				data: { title: 'Products', breadcrumb: 'Product' }
+			},
+			{
+				path: 'configuration/prices',
+				loadChildren: './views/configuration/price-list/price-list.module#PriceListModule',
+				data: { title: 'Price-List', breadcrumb: 'Price-List' }
 			}
 		]
 	},
