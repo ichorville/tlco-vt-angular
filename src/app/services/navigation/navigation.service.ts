@@ -40,6 +40,16 @@ export class NavigationService {
 			tooltip: 'Distributors',
 			icon: 'directions_run',
 			state: 'distributors/list', 
+		},
+		{
+			name: 'Price List',
+			type: 'link',
+			tooltip: 'Price List',
+			icon: 'shopping_cart',
+			state: 'configuration', 
+			sub: [
+				{ name: 'Price List', state: 'prices/list' }
+			]
 		}
 	]
 
