@@ -5,14 +5,14 @@ import { Router } from '@angular/router';
 import { FormElement } from '../../shared/form-elements/form-element';
 import { FormTextbox } from '../../shared/form-elements/form-textbox';
 
-import { ProductService } from '../product.service';
+import { DistributorService } from '../distributor.service';
 
 @Component({
-	selector: 'app-product-add',
-	templateUrl: './product-add.component.html',
-	styleUrls: ['./product-add.component.css']
+	selector: 'app-distributor-add',
+	templateUrl: './distributor-add.component.html',
+	styleUrls: ['./distributor-add.component.css']
 })
-export class ProductAddComponent implements OnInit {
+export class DistributorAddComponent implements OnInit {
 
 	// step properties
 	isLinear = true;
@@ -23,32 +23,32 @@ export class ProductAddComponent implements OnInit {
 	buttonValue: string;
 	formElements: FormElement<any>[];
 
-	distributters: any[];
-	asms: any[];
+	products: any[];
 
 	url: string;
 
-	constructor(
+	constructor (
 		private router: Router,
-		private _ps: ProductService
-	) {
-		this.url = 'products/list';
+		private _ds: DistributorService
+	) { 
+		this.url = 'distributors/list';
 		this.steps = [];
-		this.asms = [];
-		this.distributters = [];
+		this.products = [];
 	}
 
 	ngOnInit() {
-		this.distributters = this._ps.distributors;
-		this.asms = this._ps.asms;
+		// get products list and do midifications later
+		// as in convert the array to attributes with text and status likewise in the service
+		this.products = this._ds.products;
+
 		this.createSteps();
 	}
 
 	onSubmit(event) {
 		console.log(event);
-		let product = event['1']['value'];
+		let distributor = event['1']['value'];
 
-		this._ps.add(product)
+		this._ds.add(distributor)
 		setTimeout(() => {
 			this.router.navigateByUrl(`${ this.url }`);
 		}, 200);
@@ -103,36 +103,19 @@ export class ProductAddComponent implements OnInit {
 					})
 				]
 			},
-			// {
-			// 	label: 'Map Entities',
-			// 	order: 2,
-			// 	type: 'mapping',
-			// 	// isCompleted: false,
-			// 	arrayElements: [
-			// 		{
-			// 			key: 'distributors',
-			// 			title: 'Assign Distributors',
-			// 			value: this.distributters
-			// 		},
-			// 		{
-			// 			key: 'AMS',
-			// 			title: 'Assign ASMs',
-			// 			value: this.asms
-			// 		}
-			// 	]
-			// },
 			{
-				label: 'Price Revision',
+				label: 'Map Entities',
 				order: 2,
-				type: 'price-list',
-				// isCompleted: false
-			}
-		]
+				type: 'mapping',
+				// isCompleted: false,
+				arrayElements: [
+					{
+						key: 'products',
+						title: 'Assign Products',
+						value: this.products
+					}
+				]
+			},
+		];
 	}
 }
-/**
- * Form elements
- * 	if a form element is an optional attribute,
- * 		then required: false,
- * 			 validators: []
- */

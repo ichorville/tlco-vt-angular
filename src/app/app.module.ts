@@ -34,13 +34,17 @@ export function createTranslateLoader(http: Http) {
 		}),
 		RouterModule.forRoot(rootRouterConfig, { useHash: false })
 	],
-	declarations: [AppComponent],
+	declarations: [
+		AppComponent 
+	],
 	providers: [
 		RoutePartsService,
 		NavigationService,
 		AuthService,
 		{ provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [
+		AppComponent
+	]
 })
 export class AppModule { }

@@ -10,10 +10,13 @@ import { ProductService } from '../product.service';
 export class ProductListComponent implements OnInit {
 
 	rows: any;
+	url: string;
 
 	constructor(
 		private _ps: ProductService
-	) { }
+	) { 
+		this.url = 'products';
+	}
 
 	ngOnInit() {
 		this.rows = this._ps.messages;

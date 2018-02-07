@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { FormElement } from '../../shared/form-elements/form-element';
 import { FormTextbox } from '../../shared/form-elements/form-textbox';
 
-import { ProductService } from '../product.service';
+import { DistributorService } from '../distributor.service';
 
 @Component({
-	selector: 'app-product-add',
-	templateUrl: './product-add.component.html',
-	styleUrls: ['./product-add.component.css']
+	selector: 'app-distributor-edit',
+	templateUrl: './distributor-edit.component.html',
+	styleUrls: ['./distributor-edit.component.css']
 })
-export class ProductAddComponent implements OnInit {
+export class DistributorEditComponent implements OnInit {
 
-	// step properties
+	// only an edit function specific variable
+	isEdit = true;
+
 	isLinear = true;
 	steps: any[];
 
@@ -23,32 +25,37 @@ export class ProductAddComponent implements OnInit {
 	buttonValue: string;
 	formElements: FormElement<any>[];
 
-	distributters: any[];
-	asms: any[];
+	products: any[];
 
 	url: string;
+	distributor: any;
 
-	constructor(
+	constructor (
 		private router: Router,
-		private _ps: ProductService
-	) {
-		this.url = 'products/list';
+		private route: ActivatedRoute,
+		private _ds: DistributorService
+	) { 
+		this.url = 'distributors/list';
+		this.distributor = {};
 		this.steps = [];
-		this.asms = [];
-		this.distributters = [];
+		this.products = [];
+		this.createSteps();
 	}
 
 	ngOnInit() {
-		this.distributters = this._ps.distributors;
-		this.asms = this._ps.asms;
-		this.createSteps();
+		const id = +this.route.snapshot.paramMap.get('id');
+		this._ds.get(id).then((distributor) => {
+			this.distributor = distributor;
+			this.createSteps();
+		});
+		this.products = this._ds.products;
 	}
 
 	onSubmit(event) {
 		console.log(event);
-		let product = event['1']['value'];
+		let distributor = event['1']['value'];
 
-		this._ps.add(product)
+		this._ds.update(distributor)
 		setTimeout(() => {
 			this.router.navigateByUrl(`${ this.url }`);
 		}, 200);
@@ -60,12 +67,12 @@ export class ProductAddComponent implements OnInit {
 				label: 'Add Product',
 				order: 1,
 				type: 'form',
-				// isCompleted: false,
+				isCompleted: true,
 				formElements: this.formElements = [
 					new FormTextbox({
 						key: 'name',
 						label: 'Name',
-						value: '',
+						value: this.distributor['name'],
 						controlType: 'textbox',
 						type: 'text',
 						required: true,
@@ -78,7 +85,7 @@ export class ProductAddComponent implements OnInit {
 					new FormTextbox({
 						key: 'subject',
 						label: 'Subject',
-						value: '',
+						value: this.distributor['subject'],
 						controlType: 'textbox',
 						type: 'text',
 						required: null,
@@ -91,7 +98,7 @@ export class ProductAddComponent implements OnInit {
 					new FormTextbox({
 						key: 'message',
 						label: 'Message',
-						value: '',
+						value: this.distributor['message'],
 						controlType: 'textbox',
 						type: 'text',
 						required: true,
@@ -103,36 +110,19 @@ export class ProductAddComponent implements OnInit {
 					})
 				]
 			},
-			// {
-			// 	label: 'Map Entities',
-			// 	order: 2,
-			// 	type: 'mapping',
-			// 	// isCompleted: false,
-			// 	arrayElements: [
-			// 		{
-			// 			key: 'distributors',
-			// 			title: 'Assign Distributors',
-			// 			value: this.distributters
-			// 		},
-			// 		{
-			// 			key: 'AMS',
-			// 			title: 'Assign ASMs',
-			// 			value: this.asms
-			// 		}
-			// 	]
-			// },
 			{
-				label: 'Price Revision',
+				label: 'Map Entities',
 				order: 2,
-				type: 'price-list',
-				// isCompleted: false
+				type: 'mapping',
+				isCompleted: true,
+				arrayElements: [
+					{
+						key: 'products',
+						title: 'Assign Products',
+						value: this.products
+					},
+				]
 			}
-		]
+		];
 	}
 }
-/**
- * Form elements
- * 	if a form element is an optional attribute,
- * 		then required: false,
- * 			 validators: []
- */

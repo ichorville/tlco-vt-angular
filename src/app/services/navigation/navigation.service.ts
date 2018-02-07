@@ -33,6 +33,13 @@ export class NavigationService {
 			tooltip: 'Products',
 			icon: 'shopping_cart',
 			state: 'products/list', 
+		},
+		{
+			name: 'Distributors',
+			type: 'link',
+			tooltip: 'Distributors',
+			icon: 'directions_run',
+			state: 'distributors/list', 
 		}
 	]
 
