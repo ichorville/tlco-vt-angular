@@ -16,6 +16,9 @@ export class DatatableComponent implements OnInit, OnChanges {
 	@Input()
 	rows: any[];
 
+	@Input()
+	url: string;
+
 	pages: any[];
 	filteredRows: any[];
 	searchResults: any[];

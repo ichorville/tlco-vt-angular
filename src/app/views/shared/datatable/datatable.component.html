@@ -72,8 +72,8 @@
 							<mat-icon class="text-muted">more_vert</mat-icon>
 						</button>
 						<mat-menu #msgMenu="matMenu">
-							<a mat-menu-item routerLinkActive="active" routerLink="/products/config">Add</a>
-							<a mat-menu-item routerLinkActive="active" routerLink="/products/{{ message.id }}/config">Edit</a>		
+							<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/config">Add</a>
+							<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/{{ message.id }}/config">Edit</a>		
 							<button mat-menu-item>Delete</button>
 						</mat-menu>
 
