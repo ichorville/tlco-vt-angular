@@ -150,7 +150,6 @@ export class EntityMappingComponent implements OnInit {
 				arr.push('Item Completed');
 			} 
 		});
-		console.log(arr.length);
 		if (arr.length != this.mapEntityArray.length) {
 			return this.openSnackBar('Entity Mapping Process Incomplete');
 		} else {	
