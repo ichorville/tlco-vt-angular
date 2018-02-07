@@ -39,7 +39,7 @@ export class NavigationService {
 			type: 'link',
 			tooltip: 'Distributors',
 			icon: 'directions_run',
-			state: 'disbutors/list', 
+			state: 'distributors/list', 
 		}
 	]
 
