@@ -1,5 +1,6 @@
 <mat-card class="p-0">
 	<form [formGroup]="configForm">
+		<!-- Config Stepper beginning -->
 		<mat-horizontal-stepper 
 			#configStepper
 			formArrayName="formConfigArray" 
@@ -12,6 +13,7 @@
 				[ngSwitch]="step.type">
 				<ng-template matStepLabel>{{ step.label }}</ng-template>
 
+				<!-- Dynamic Step form template -->
 				<app-dynamic-step-form
 					*ngSwitchCase="'form'"
 					[isEdit]="isEdit"
@@ -21,6 +23,7 @@
 					(onFormCompletion)="unlockStep($event)">
 				</app-dynamic-step-form>
 
+				<!-- Entity mapping template -->
 				<app-entity-mapping
 					*ngSwitchCase="'mapping'"
 					[isEdit]="isEdit"
@@ -29,6 +32,12 @@
 					(onMappingCompletion)="unlockStep($event)">
 				</app-entity-mapping>
 
+				<!-- Price revision template for Products -->
+				<app-price-revision
+					*ngSwitchCase="'price-list'">
+				</app-price-revision>
+				
+				<!-- Stepper checkbox to indicate form validity: Hidden -->
 				<div fxLayout="row">
 					<button *ngIf="step.order != 1" mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
@@ -41,6 +50,7 @@
 				</div>
 			</mat-step>
 	
+			<!-- Mat stepper navigation buttons -->
 			<mat-step>
 				<ng-template matStepLabel>Done</ng-template>
 				You are now done.
