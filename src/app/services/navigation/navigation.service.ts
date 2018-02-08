@@ -42,10 +42,10 @@ export class NavigationService {
 			state: 'distributors/list', 
 		},
 		{
-			name: 'Price List',
-			type: 'link',
-			tooltip: 'Price List',
-			icon: 'shopping_cart',
+			name: 'Configuration',
+			type: 'dropDown',
+			tooltip: 'Configuration',
+			icon: 'settings',
 			state: 'configuration', 
 			sub: [
 				{ name: 'Price List', state: 'prices/list' }
