@@ -1,119 +1,114 @@
 <mat-sidenav-container>
+	<!-- right side topbar -->
+	<mat-toolbar color="primary" class="inbox-toolbar">
+		<!-- multiple email select and control -->
+		<mat-checkbox (change)="selectToggleAll()" class="inbox-toggle-all mr-1">
+			<small>All</small>
+		</mat-checkbox>
+		<button mat-icon-button matTooltip="Move to trash">
+			<mat-icon>delete</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Mark as important" class="">
+			<mat-icon>folder_special</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Move to archive">
+			<mat-icon>archive</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Report spam">
+			<mat-icon>error</mat-icon>
+		</button>
+		<span style="flex: 1 1 auto;"></span>
+		<!-- Filter by Columns -->
+		<app-search
+			[terms]="searchResults"
+			[placeholder]="'Search All Columns'"
+			(onFilter)="reDraw($event)">
+		</app-search>
+	</mat-toolbar>
 
-	<div class="messages-wrap">
-		<!-- right side topbar -->
-		<mat-toolbar color="primary" class="inbox-toolbar">
-			<!-- multiple email select and control -->
-			<mat-checkbox (change)="selectToggleAll()" class="inbox-toggle-all mr-1">
-				<small>All</small>
-			</mat-checkbox>
-			<button mat-icon-button matTooltip="Move to trash">
-				<mat-icon>delete</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Mark as important" class="">
-				<mat-icon>folder_special</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Move to archive">
-				<mat-icon>archive</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Report spam">
-				<mat-icon>error</mat-icon>
-			</button>
-			<span style="flex: 1 1 auto;"></span>
-			<!-- Filter by Columns -->
-			<app-search
-				[terms]="searchResults"
-				[placeholder]="'Search All Columns'"
-				(onFilter)="reDraw($event)">
-			</app-search>
+	<div *ngIf="isValid" class="inbox-hold">
+		<!-- Column header -->
+		<mat-toolbar fxHide.lt-sm="true" class="inbox-toolbar" style="border-bottom:1px solid rgba(0, 0, 0, .12);font-size:1.115rem !important;">
+			<div fxFlex="18 1 auto" fxLayout="row">
+				<span style="padding-left:30px;"></span>
+				<!-- (show on close) -->
+				<small class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">Column Header</small>
+				<!-- (always show) -->
+				<small>Column Header</small>
+			</div>
+			<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
+			<!-- Single emial date (show on close) -->
+			<small class="hidden-on-open">Column Header</small>
+			<span style="padding-right:30px;"></span>
 		</mat-toolbar>
 
-		<div *ngIf="isValid" class="inbox-hold">
-			<!-- Column header -->
-			<mat-toolbar fxHide.lt-sm="true" class="inbox-toolbar" style="border-bottom:1px solid rgba(0, 0, 0, .12);font-size:1.115rem !important;">
-				<div fxFlex="18 1 auto" fxLayout="row">
-					<span style="padding-left:30px;"></span>
-					<!-- (show on close) -->
-					<small class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">Column Header</small>
-					<!-- (always show) -->
-					<small>Column Header</small>
-				</div>
-				<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
-				<!-- Single emial date (show on close) -->
-				<small class="hidden-on-open">Column Header</small>
-				<span style="padding-right:30px;"></span>
-			</mat-toolbar>
+		<mat-list class="messages">
+			<mat-list-item *ngFor="let message of filteredRows" class="message-item app-accordion">
+				<div fxLayout="row" fxLayoutAlign="start center" class="message-head">
+					<!-- Single email select and star (show on close) -->
+					<mat-checkbox [(ngModel)]="message.selected" class="hidden-on-open mail-check"></mat-checkbox>
+					<!-- Single emial photo and date (show on open) -->
+					<div fxFlex="1 1 auto" fxLayout="row" class="show-on-open mr-1">
+						<img [src]="message.photo" alt="" class="inbox-face mr-1">
+						<div fxLayout="column">
+							<span class="mat-card-title m-0">{{ message.name }}</span>
+							<small class="mat-card-subtitle m-0">{{ message.date | date }}</small>
+						</div>
+					</div>
+					<!-- Single emial name and subject -->
+					<div appAccordion fxFlex="18 1 auto" fxLayout="row">
+						<!-- (show on close) -->
+						<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{ message.name }}</div>
+						<!-- (always show) -->
+						<div>{{ message.subject }}</div>
+					</div>
+					<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
+					<!-- Single emial date (show on close) -->
+					<small class="hidden-on-open">{{ message.date | date }}</small>
+					<!-- Single emial top Drop down (show on close) -->
+					<button mat-icon-button [matMenuTriggerFor]="msgMenu" class="hidden-on-open">
+						<mat-icon class="text-muted">more_vert</mat-icon>
+					</button>
+					<mat-menu #msgMenu="matMenu">
+						<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/config">Add</a>
+						<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/{{ message.id }}/config">Edit</a>		
+						<button mat-menu-item>Delete</button>
+					</mat-menu>
 
-			<mat-list class="messages">
-				<mat-list-item *ngFor="let message of filteredRows" class="message-item app-accordion">
-					<div fxLayout="row" fxLayoutAlign="start center" class="message-head">
-						<!-- Single email select and star (show on close) -->
-						<mat-checkbox [(ngModel)]="message.selected" class="hidden-on-open mail-check"></mat-checkbox>
-						<!-- Single emial photo and date (show on open) -->
-						<div fxFlex="1 1 auto" fxLayout="row" class="show-on-open mr-1">
-							<img [src]="message.photo" alt="" class="inbox-face mr-1">
-							<div fxLayout="column">
-								<span class="mat-card-title m-0">{{ message.name }}</span>
-								<small class="mat-card-subtitle m-0">{{ message.date | date }}</small>
-							</div>
-						</div>
-						<!-- Single emial name and subject -->
-						<div appAccordion fxFlex="18 1 auto" fxLayout="row">
-							<!-- (show on close) -->
-							<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{ message.name }}</div>
-							<!-- (always show) -->
-							<div>{{ message.subject }}</div>
-						</div>
-						<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
-						<!-- Single emial date (show on close) -->
-						<small class="hidden-on-open">{{ message.date | date }}</small>
-						<!-- Single emial top Drop down (show on close) -->
-						<button mat-icon-button [matMenuTriggerFor]="msgMenu" class="hidden-on-open">
-							<mat-icon class="text-muted">more_vert</mat-icon>
+					<!-- Single emial top Icons (show on open) -->
+					<div class="show-on-open">
+						<button mat-icon-button matTooltip="Reply">
+							<mat-icon class="text-muted">reply</mat-icon>
 						</button>
-						<mat-menu #msgMenu="matMenu">
-							<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/config">Add</a>
-							<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/{{ message.id }}/config">Edit</a>		
-							<button mat-menu-item>Delete</button>
-						</mat-menu>
-
-						<!-- Single emial top Icons (show on open) -->
-						<div class="show-on-open">
-							<button mat-icon-button matTooltip="Reply">
-								<mat-icon class="text-muted">reply</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Mark as important">
-								<mat-icon class="text-muted">folder_special</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Move to archive">
-								<mat-icon class="text-muted">archive</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Move to trash">
-								<mat-icon class="text-muted">delete</mat-icon>
-							</button>
-						</div>
+						<button mat-icon-button matTooltip="Mark as important">
+							<mat-icon class="text-muted">folder_special</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Move to archive">
+							<mat-icon class="text-muted">archive</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Move to trash">
+							<mat-icon class="text-muted">delete</mat-icon>
+						</button>
 					</div>
+				</div>
 
-					<!-- Single text (show on open) -->
-					<div class="message-content accordion-content">
-						<div class="message-text" [innerHTML]="message.message"></div>
-					</div>
-				</mat-list-item>
-			</mat-list>
+				<!-- Single text (show on open) -->
+				<div class="message-content accordion-content">
+					<div class="message-text" [innerHTML]="message.message"></div>
+				</div>
+			</mat-list-item>
+		</mat-list>
 
-			<!-- Pagintion Row -->
-			<app-pagination *ngIf="isInit"
-				[pages]="pages"
-				[totalRows]="rows.length"
-				[selectedPage]="selectedPage"
-				(onPageClick)="paginate($event)">
-			</app-pagination>
-
-		</div>
-
-		<mat-toolbar *ngIf="!isValid" color="primary" class="inbox-toolbar">
-			<span>No Matching Records Found</span>
-		</mat-toolbar>	
-			
+		<!-- Pagintion Row -->
+		<app-pagination *ngIf="isInit"
+			[pages]="pages"
+			[totalRows]="rows.length"
+			[selectedPage]="selectedPage"
+			(onPageClick)="paginate($event)">
+		</app-pagination>
 	</div>
+
+	<mat-toolbar *ngIf="!isValid" color="primary" class="inbox-toolbar">
+		<span>No Matching Records Found</span>
+	</mat-toolbar>	
 </mat-sidenav-container>
