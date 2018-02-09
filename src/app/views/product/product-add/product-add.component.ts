@@ -103,24 +103,6 @@ export class ProductAddComponent implements OnInit {
 					})
 				]
 			},
-			// {
-			// 	label: 'Map Entities',
-			// 	order: 2,
-			// 	type: 'mapping',
-			// 	// isCompleted: false,
-			// 	arrayElements: [
-			// 		{
-			// 			key: 'distributors',
-			// 			title: 'Assign Distributors',
-			// 			value: this.distributters
-			// 		},
-			// 		{
-			// 			key: 'AMS',
-			// 			title: 'Assign ASMs',
-			// 			value: this.asms
-			// 		}
-			// 	]
-			// },
 			{
 				label: 'Price Revision',
 				order: 2,
