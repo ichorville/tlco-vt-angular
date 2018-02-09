@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class DatatableService {
     getPageCount(arrLength: number): Promise<any> {
 		return Promise.resolve(true).then(() => {
-			// default page limit is 5
+			// default page limit is 10
 			let value = Math.ceil(arrLength/10);
 			let pages = new Array(value).join().split(',').map(function (item, index) {
 				return ++index;
