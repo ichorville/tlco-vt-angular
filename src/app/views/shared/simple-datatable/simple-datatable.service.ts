@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class DatatableService {
+export class SimpleDatatableService {
     getPageCount(arrLength: number): Promise<any> {
 		return Promise.resolve(true).then(() => {
 			// default page limit is 10

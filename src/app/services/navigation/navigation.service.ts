@@ -40,6 +40,16 @@ export class NavigationService {
 			tooltip: 'Distributors',
 			icon: 'directions_run',
 			state: 'distributors/list', 
+		},
+		{
+			name: 'Configuration',
+			type: 'dropDown',
+			tooltip: 'Configuration',
+			icon: 'settings',
+			state: 'configuration', 
+			sub: [
+				{ name: 'Price List', state: 'prices/list' }
+			]
 		}
 	]
 

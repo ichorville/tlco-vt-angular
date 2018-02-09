@@ -41,6 +41,11 @@ export const rootRouterConfig: Routes = [
 				path: 'distributors',
 				loadChildren: './views/distributor/distributor.module#DistributorModule',
 				data: { title: 'Distributors', breadcrumb: 'Distributor' }
+			},
+			{
+				path: 'configuration/prices',
+				loadChildren: './views/configuration/price-list/price-list.module#PriceListModule',
+				data: { title: 'Price-List', breadcrumb: 'Price-List' }
 			}
 		]
 	},

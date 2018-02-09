@@ -1,0 +1,150 @@
+.tab-header {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.cell {
+	padding: .9rem 1.2rem;
+	text-align: left;
+	font-weight: 400;
+	color: rgba(0, 0, 0, .54);
+	vertical-align: bottom;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.tab-color {
+	background-color: #fff !important;
+	background-position: 100% 0 !important;
+	background-repeat: repeat-y !important;
+}
+
+.data-cell {
+	text-align: left;
+	padding: .9rem 1.2rem;
+	vertical-align: top;
+	border-top: 0;
+	color: rgba(0, 0, 0, .87);
+	transition: width .3s ease;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.Table {
+	background: #fff;
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) /** * Shared Styles */ /** * Global Row Styles */ /** * Header Styles */ /** * Body Styles */ /** * Footer Styles */;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-flow: column nowrap;
+	-ms-flex-flow: column nowrap;
+	flex-flow: column nowrap;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.Table-header {
+	  display: none;
+	  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 500px) {
+	.Table-header {
+		font-weight: 700;
+		background-color: #f2f2f2;
+	}
+}
+
+.Table-row {
+	width: 100%;
+	background-color: #ffffff;
+}
+
+.Table-row:nth-of-type(even) {
+	background-color: #ffffff;
+}
+
+.Table-row:nth-of-type(odd) {
+  	background-color: #ffffff;
+}
+
+@media (min-width: 500px) {
+	.Table-row {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-flow: row nowrap;
+		-ms-flex-flow: row nowrap;
+		flex-flow: row nowrap;
+	}
+}
+
+.Table-row-item {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-flow: row nowrap;
+	-ms-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	-webkit-flex-basis: 0;
+	-ms-flex-preferred-size: 0;
+	flex-basis: 0;
+	word-break: break-word;
+}
+
+.Table-row-item:before {
+	content: attr(data-header);
+	width: 30%;
+	font-weight: 700;
+}
+
+@media (min-width: 500px) {
+	.Table-row-item {
+		border: 1px solid #ffffff;
+	}
+	.Table-row-item:before {
+		content: none;
+	}
+}
+
+.Table-row.Table-header:hover {
+
+}
+
+.mail-check {
+	padding-top: 14px;
+    padding-left: 17px;
+}
+
+:host/deep/app-pagination mat-toolbar {
+	border-top: 1px solid rgba(0, 0, 0, 0.12);
+	background-color: #ffffff !important;
+	-webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) /** * Shared Styles */ /** * Global Row Styles */ /** * Header Styles */ /** * Body Styles */ /** * Footer Styles */;
+}
+
+:host/deep/app-pagination .selected {
+	background-color: #3f51b5 !important;
+    color: #ffffff;
+}
+
+:host/deep/app-pagination a {
+	color: rgba(0,0,0,.54);
+}
+
+:host/deep/app-pagination .example-text  {
+	color: rgba(0,0,0,.54);
+}
