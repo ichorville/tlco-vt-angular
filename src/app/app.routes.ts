@@ -45,7 +45,7 @@ export const rootRouterConfig: Routes = [
 			{
 				path: 'configuration/prices',
 				loadChildren: './views/configuration/price-list/price-list.module#PriceListModule',
-				data: { title: 'Price-List', breadcrumb: 'Price-List' }
+				data: { title: 'Prices', breadcrumb: 'Prices' }
 			}
 		]
 	},
