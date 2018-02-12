@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
 
 import { SimpleDatatableModule } from '../../shared/simple-datatable/simple-datatable.module';
+import { AppLoaderModule } from '../../../services/app-loader/app-loader.module';
 
 import { PriceListComponent } from './price-list/price-list.component';
 import { PriceListAddComponent } from './price-list-add/price-list-add.component';
@@ -10,12 +11,14 @@ import { PriceListEditComponent } from './price-list-edit/price-list-edit.compon
 
 import { PriceListRoutes } from "./price-list.routing";
 import { PriceListService } from './price-list.service';
+import { AppLoaderService } from '../../../services/app-loader/app-loader.service';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		RouterModule.forChild(PriceListRoutes),
-		SimpleDatatableModule
+		SimpleDatatableModule,
+		AppLoaderModule
 	],
 	declarations: [
 		PriceListComponent, 
@@ -23,7 +26,8 @@ import { PriceListService } from './price-list.service';
 		PriceListEditComponent
 	],
 	providers: [
-		PriceListService
+		PriceListService,
+		AppLoaderService
 	]
 })
 export class PriceListModule { }
