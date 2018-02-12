@@ -12,7 +12,9 @@ import {
 	MatCheckboxModule,
 	MatButtonModule,
 	MatIconModule,
-	MatStepperModule
+	MatStepperModule,
+	MatSelectModule,
+	MatSlideToggleModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -37,8 +39,10 @@ import { FormControlService } from './form-control.service';
 		MatButtonModule,
 		MatIconModule,
 		MatStepperModule,
+		MatSelectModule,
 		FlexLayoutModule,
-		QuillModule
+		QuillModule,
+		MatSlideToggleModule
 	],
 	declarations: [
 		DynamicFormComponent
