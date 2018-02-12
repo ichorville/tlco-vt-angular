@@ -12,7 +12,8 @@ import {
 	MatDialogModule,
 	MatListModule,
 	MatCheckboxModule,
-	MatTooltipModule
+	MatTooltipModule,
+	MatChipsModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -20,8 +21,15 @@ import { CommonDirectivesModule } from '../../../directives/common/common-direct
 import { PaginationModule } from '../pagination/pagination.module';
 import { SearchModule } from '../search/search.module';
 
+import { AppConfirmModule } from '../../../services/app-confirm/app-confirm.module';
+import { AppConfirmService } from '../../../services/app-confirm/app-confirm.service';
+
+import { DialogFormModule } from '../dialog-form/dialog-form.module';
+import { DialogFormService } from '../dialog-form/dialog-form.service';
+
 import { SimpleDatatableComponent } from './simple-datatable.component';
 import { SimpleDatatableService } from './simple-datatable.service';
+
 @NgModule({
 	imports: [
 		CommonModule,
@@ -38,17 +46,22 @@ import { SimpleDatatableService } from './simple-datatable.service';
 		MatListModule,
 		MatCheckboxModule,
 		MatTooltipModule,
+		MatChipsModule,
 		FlexLayoutModule,
 		QuillModule,
 		CommonDirectivesModule,
 		PaginationModule,
-		SearchModule
+		SearchModule,
+		AppConfirmModule,
+		DialogFormModule
 	],
 	declarations: [
 		SimpleDatatableComponent
 	], 
 	providers: [
-		SimpleDatatableService
+		SimpleDatatableService,
+		AppConfirmService,
+		DialogFormService
 	],
 	exports: [
 		SimpleDatatableComponent
