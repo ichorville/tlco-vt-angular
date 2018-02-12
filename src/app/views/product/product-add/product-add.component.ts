@@ -26,6 +26,8 @@ export class ProductAddComponent implements OnInit {
 	distributters: any[];
 	asms: any[];
 
+	priceRevisionList: any[];
+
 	url: string;
 
 	constructor(
@@ -36,11 +38,13 @@ export class ProductAddComponent implements OnInit {
 		this.steps = [];
 		this.asms = [];
 		this.distributters = [];
+		this.priceRevisionList = [];
 	}
 
 	ngOnInit() {
 		this.distributters = this._ps.distributors;
 		this.asms = this._ps.asms;
+		this.priceRevisionList = this._ps.priceRevision;
 		this.createSteps();
 	}
 
@@ -107,6 +111,7 @@ export class ProductAddComponent implements OnInit {
 				label: 'Price Revision',
 				order: 2,
 				type: 'price-list',
+				listItems: this.priceRevisionList
 				// isCompleted: false
 			}
 		]
