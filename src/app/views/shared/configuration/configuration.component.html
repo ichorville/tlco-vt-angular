@@ -34,7 +34,8 @@
 
 				<!-- Price revision template for Products -->
 				<app-price-revision
-					*ngSwitchCase="'price-list'">
+					*ngSwitchCase="'price-list'"
+					[priceListItems]="step.listItems">
 				</app-price-revision>
 				
 				<!-- Stepper checkbox to indicate form validity: Hidden -->
