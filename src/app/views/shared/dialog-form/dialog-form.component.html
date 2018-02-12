@@ -1,0 +1,16 @@
+<h1 matDialogTitle>
+	{{ data.title }}
+</h1>
+<div mat-dialog-content>
+	<app-dynamic-form
+		[saveBtn]="false"
+		[formElements]="data.formElements"
+		(onFormValid)="unlockForm($event)">
+	</app-dynamic-form>
+</div>
+<div mat-dialog-actions>
+	<button type="button" mat-raised-button color="primary" (click)="save()">Save</button>
+	&nbsp;
+	<span fxFlex></span>
+	<button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+</div>

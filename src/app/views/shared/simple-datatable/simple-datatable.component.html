@@ -16,50 +16,61 @@
 		<mat-icon>error</mat-icon>
 	</button>
 	<span style="flex: 1 1 auto;"></span>
+	<button mat-raised-button style="color:#3f51b5;"
+		(click)="addRecord()">Add {{ title }}</button>
+</mat-toolbar>
+<mat-toolbar class="search-toolbar">
 	<!-- Filter by Columns -->
-	<app-search
+	<app-search style="width:100%;"
 		[terms]="searchResults"
 		[placeholder]="'Search All Columns'"
 		(onFilter)="reDraw($event)">
 	</app-search>
 </mat-toolbar>
-<!-- Simple Datatable view -->
-<div class="Table" *ngIf="isValid">
-	<!-- Columns section -->
-	<div class="Table-row Table-header">
-		<span style="padding-left:38px;"></span>
-		<div class="Table-row-item cell" *ngFor="let column of columns">
-			{{ column.name }}
+<mat-card *ngIf="isValid">
+	<!-- Simple Datatable view -->
+	<div class="Table">
+		<!-- Columns section -->
+		<div class="Table-row Table-header">
+			<span style="padding-left:38px;"></span>
+			<div class="Table-row-item cell" *ngFor="let column of columns">
+				{{ column.name }}
+			</div>
+			<div class="Table-row-item cell">Actions</div>
 		</div>
-		<span style="padding-right: 40px;"></span>
-	</div>
-	<!-- Body section -->
-	<div class="Table-row" *ngFor="let row of filteredRows">
-		<mat-checkbox class="hidden-on-open mail-check"></mat-checkbox>
-		<div class="Table-row-item data-cell" data-header="Header1"
-			*ngFor="let column of columns" [ngSwitch]="column.type">
-			<span *ngSwitchCase="'string'">{{ row[column.attr] }} </span>
+		<!-- Body section -->
+		<div class="Table-row" *ngFor="let row of filteredRows">
+			<mat-checkbox class="hidden-on-open mail-check"></mat-checkbox>
+			<div class="Table-row-item data-cell" attr.data-header="{{ column.name }}"
+				*ngFor="let column of columns" [ngSwitch]="column.type">
+				<span *ngSwitchCase="'string'">{{ row[column.attr] }}</span>
+				<!-- Status of chips -->
+				<span *ngSwitchCase="'chip'">
+					<mat-chip *ngIf="row[column.attr]" color="primary" selected="true">active</mat-chip>
+					<mat-chip *ngIf="!row[column.attr]" color="primary">inactive</mat-chip>
+				</span>
+			</div>
+			<div class="Table-row-item data-cell" style="padding-bottom:0px;padding-top:5px;"
+				data-header="Actions">
+				<button mat-icon-button color="primary"
+					(click)="editRecord(row)">
+					<mat-icon>create</mat-icon>
+				</button>
+				<button mat-icon-button color="warn"
+					(click)="deleteRecord(row['toBeDeleted']);">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</div>
 		</div>
-		<button mat-icon-button [matMenuTriggerFor]="msgMenu" class="hidden-on-open">
-			<mat-icon class="text-muted">more_vert</mat-icon>
-		</button>
-		<mat-menu #msgMenu="matMenu">
-			<a mat-menu-item routerLinkActive="active">
-				<mat-icon>add</mat-icon>Add
-			</a>
-			<a mat-menu-item routerLinkActive="active">
-				<mat-icon>create</mat-icon>Edit
-			</a>		
-			<button mat-menu-item>
-				<mat-icon>delete</mat-icon>Delete
-			</button>
-		</mat-menu>
 	</div>
-</div>
-<!-- Pagination Module -->
-<app-pagination *ngIf="isInit"
-	[pages]="pages"
-	[totalRows]="rows.length"
-	[selectedPage]="selectedPage"
-	(onPageClick)="paginate($event)">
-</app-pagination>
+	<!-- Pagination Module -->
+	<app-pagination *ngIf="isInit"
+		[pages]="pages"
+		[totalRows]="rows.length"
+		[selectedPage]="selectedPage"
+		(onPageClick)="paginate($event)">
+	</app-pagination>
+</mat-card>
+<mat-toolbar *ngIf="!isValid" style="background: whitesmoke" class="inbox-toolbar">
+	<span style="font-weight: 200; color:black;">No Matching Records Found</span>
+</mat-toolbar>	

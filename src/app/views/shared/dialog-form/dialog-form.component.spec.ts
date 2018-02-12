@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PriceListEditComponent } from './price-list-edit.component';
+import { DialogFormComponent } from './dialog-form.component';
 
-describe('PriceListEditComponent', () => {
-  let component: PriceListEditComponent;
-  let fixture: ComponentFixture<PriceListEditComponent>;
+describe('DialogFormComponent', () => {
+  let component: DialogFormComponent;
+  let fixture: ComponentFixture<DialogFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PriceListEditComponent ]
+      declarations: [ DialogFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PriceListEditComponent);
+    fixture = TestBed.createComponent(DialogFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

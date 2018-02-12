@@ -1,4 +1,11 @@
 <app-simple-datatable
+	*ngIf="loadingCompleted"
 	[rows]="rows"
-	[columns]="columns">
+	[columns]="columns"
+	[formElements]="formElements"
+	[title]="title"
+	(onLoad)="closeLoader($event)"
+	(onAdd)="add($event)"
+	(onEdit)="update($event)"
+	(onDelete)="delete($event)">
 </app-simple-datatable>

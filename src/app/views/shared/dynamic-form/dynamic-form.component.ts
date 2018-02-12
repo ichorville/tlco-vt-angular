@@ -14,6 +14,9 @@ import { FormControlService } from './form-control.service';
 export class DynamicFormComponent implements OnInit {
 
 	@Input()
+	saveBtn: boolean;
+
+	@Input()
 	formElements: FormElement<any>[];
 
 	@Input()
@@ -21,6 +24,9 @@ export class DynamicFormComponent implements OnInit {
 
 	@Input()
 	title: string;
+
+	@Output()
+	onFormValid: EventEmitter<any>;
 
 	// @Output()
 	// onFormSubmit: EventEmitter<FormSubmitEvent>;
@@ -38,6 +44,7 @@ export class DynamicFormComponent implements OnInit {
 		private cd: ChangeDetectorRef
 	) { 
 		this.tempFormElements = [];
+		this.onFormValid = new EventEmitter<any>();
 		// this.formSubmitEvent = new FormSubmitEvent();
 		// this.onFormSubmit = new EventEmitter<FormSubmitEvent>();
 	}
@@ -115,6 +122,10 @@ export class DynamicFormComponent implements OnInit {
 				const message = `${this.formElements[formElement]['placeholder']} is required`;
 				this.formElements[formElement]['errors'].push(message);
 			}
+		}
+
+		if (this.saveBtn == false) {
+			this.onFormValid.emit(form);
 		}
 	}
 }

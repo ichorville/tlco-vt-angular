@@ -11,7 +11,8 @@ export class FormControlService {
 		let group: any = {};
 
 		formElements.forEach(formElement => {
-			group[formElement.key] = new FormControl(formElement.value || '', formElement.validators);
+			group[formElement.key] = new FormControl(
+				{ value: formElement.value || '', disabled: formElement.disabled }, formElement.validators);
 		});
 
 		return new FormGroup(group);
