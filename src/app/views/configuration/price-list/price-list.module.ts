@@ -6,8 +6,6 @@ import { SimpleDatatableModule } from '../../shared/simple-datatable/simple-data
 import { AppLoaderModule } from '../../../services/app-loader/app-loader.module';
 
 import { PriceListComponent } from './price-list/price-list.component';
-import { PriceListAddComponent } from './price-list-add/price-list-add.component';
-import { PriceListEditComponent } from './price-list-edit/price-list-edit.component';
 
 import { PriceListRoutes } from "./price-list.routing";
 import { PriceListService } from './price-list.service';
@@ -21,9 +19,7 @@ import { AppLoaderService } from '../../../services/app-loader/app-loader.servic
 		AppLoaderModule
 	],
 	declarations: [
-		PriceListComponent, 
-		PriceListAddComponent, 
-		PriceListEditComponent
+		PriceListComponent
 	],
 	providers: [
 		PriceListService,
