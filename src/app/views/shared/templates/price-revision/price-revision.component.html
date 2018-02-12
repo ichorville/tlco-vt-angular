@@ -1,3 +1,59 @@
-<p>
-  price-revision works!
-</p>
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex="100" fxFlex.gt-md="300px" fxFlex.gt-sm="50">
+		<!-- Product Portfolio -->
+		<mat-card class="profile-sidebar mb-1 pb-0">
+			<div class="propic text-center">
+				<mat-icon style="font-size:75px;width:75px;">shopping_cart</mat-icon>
+			</div>
+			<div class="profile-title text-center mb-1">
+				<div class="main-title">Jhone
+					<b>Doe</b>
+				</div>
+				<div class="subtitle mb-05">Big Data Expert</div>
+				<div class="text-muted">Configure Entity mappings for seledted Item</div>
+			</div>
+			<div class="profile-actions text-center mb-1">
+				<button mat-raised-button color="primary" (click)="onMapCompletion()">Confirm Revisions</button>
+			</div>
+			<div class="profile-nav">
+				<!-- For later use -->
+			</div>
+		</mat-card>
+	</div>
+	<div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
+		<mat-card>
+			<mat-card-content style="padding: 0 0rem 1.5rem;">
+				<mat-tab-group class="demo-tab-group" style="width: -webkit-fill-available;">
+					<mat-tab label="{{ listItem.type }}" *ngFor="let listItem of priceListItems">
+						<div class="demo-tab-content">
+							<div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
+								<mat-form-field class="full-width" style="padding-top: 10px;">
+									<mat-select placeholder="Price List">
+										<mat-option *ngFor="let item of listItem.children" [value]="item.name">
+											{{ item.name }}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+							<div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
+								<mat-form-field class="full-width" style="padding-top: 10px;">
+									<input matInput type="number" placeholder="Price">
+								</mat-form-field>
+								<mat-form-field class="full-width">
+									<input matInput [matDatepicker]="effectiveDate" placeholder="Effective Date">
+									<mat-datepicker-toggle matSuffix [for]="effectiveDate"></mat-datepicker-toggle>
+									<mat-datepicker #effectiveDate></mat-datepicker>
+								</mat-form-field>
+								<mat-form-field class="full-width">
+									<input matInput [matDatepicker]="expiryDate" placeholder="Expiry Date">
+									<mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+									<mat-datepicker #expiryDate></mat-datepicker>
+								</mat-form-field>
+							</div>	
+						</div>
+					</mat-tab>
+				</mat-tab-group>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
