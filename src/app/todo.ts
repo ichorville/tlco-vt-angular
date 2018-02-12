@@ -13,8 +13,11 @@
  * 
  * // Dynamic Step form module
  * 1. allign steps to be in multiple rows rather than be in one single row when the the entity configuration changes
- * 2. form validation logic on code behind eg: onValueChnged()
+ * 2. form validation logic on code behind eg: onValueChnged() - DONE
  * 
  * // Search module 
- * 1. multiple search process in Entity-mapping module have to be simplified for each search component used
+ * 1. multiple search process in Entity-mapping module have to be simplified for each search component used - DONE
+ * 
+ * // Dynamic Form Module
+ * 1. Add slide down animation to mat-error form validatio 
  */
