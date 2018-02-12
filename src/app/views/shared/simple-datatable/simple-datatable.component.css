@@ -22,19 +22,26 @@
 
 .data-cell {
 	text-align: left;
-	padding: .9rem 1.2rem;
+	padding: 1.0rem 1.2rem;
 	vertical-align: top;
 	border-top: 0;
 	color: rgba(0, 0, 0, .87);
 	transition: width .3s ease;
 	font-size: 14px;
 	font-weight: 400;
+	line-height: 1.625;
+}
+
+.search-toolbar {
+	border-bottom: 1px solid rgba(0,0,0,.12);
+    background: #ffffff;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    min-height: 56px !important;
 }
 
 .Table {
 	background: #fff;
-    -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
-    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) /** * Shared Styles */ /** * Global Row Styles */ /** * Header Styles */ /** * Body Styles */ /** * Footer Styles */;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -112,16 +119,23 @@
 }
 
 @media (min-width: 500px) {
-	.Table-row-item {
-		border: 1px solid #ffffff;
-	}
 	.Table-row-item:before {
 		content: none;
 	}
 }
 
 .Table-row.Table-header:hover {
+	background-color: #ffffff;
+}
 
+.Table-row:hover {
+	background-color: #eee;
+    -webkit-transition-property: background;
+    transition-property: background;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
 }
 
 .mail-check {
@@ -132,8 +146,7 @@
 :host/deep/app-pagination mat-toolbar {
 	border-top: 1px solid rgba(0, 0, 0, 0.12);
 	background-color: #ffffff !important;
-	-webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
-    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) /** * Shared Styles */ /** * Global Row Styles */ /** * Header Styles */ /** * Body Styles */ /** * Footer Styles */;
+	box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 :host/deep/app-pagination .selected {
@@ -143,8 +156,28 @@
 
 :host/deep/app-pagination a {
 	color: rgba(0,0,0,.54);
+	min-width: 12px;
 }
 
 :host/deep/app-pagination .example-text  {
 	color: rgba(0,0,0,.54);
+	font-size: 12px !important;
+	font-weight: 400;
+}
+mat-chip {
+	padding: 4px 6px 4px 6px!important;
+    border-radius: 4px!important;
+    font-size: 12px!important;
+    line-height: 12px!important;
+    max-height: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:host/deep/app-search .mat-form-field-placeholder {
+    color: #3f51b5;
+}
+
+:host/deep/app-search .mat-input-underline {
+	background-color: #3f51b5 !important;
 }
