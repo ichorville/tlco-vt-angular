@@ -458,6 +458,28 @@ export class ProductService {
         }
     ]; 
 
+    priceRevision = [
+        {
+            type: 'DPL',
+            children: [
+                { name: '123123' },
+                { name: 'DP' }
+            ]
+        },
+        {
+            type: 'RPL',
+            children: [
+                { name: 'WSP' }
+            ]
+        }, 
+        {
+            type: 'MRP',
+            children: [
+                { name: 'MRP' }
+            ]
+        }
+    ]
+
     // asms: [
     //     {
     //         text: 'Mark-Pat-Bill-Joe-Dinosaur',
