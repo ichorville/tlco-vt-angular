@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-price-revision',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./price-revision.component.css']
 })
 export class PriceRevisionComponent implements OnInit {
+
+	@Input()
+	priceListItems: any[];
 
 	constructor() { }
 
