@@ -1,5 +1,9 @@
 <app-simple-datatable
 	*ngIf="loadingCompleted"
+	[isSearchable]="true"
+	[isMultiSelect]="true"
+	[isEditable]="true"
+	[isDeletable]="true"
 	[rows]="rows"
 	[columns]="columns"
 	[formElements]="formElements"
