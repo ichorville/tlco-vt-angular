@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="inbox-toolbar">
+<mat-toolbar color="primary" class="inbox-toolbar" *ngIf="isMultiSelect">
 	<!-- multiple user options and search toolbar -->
 	<mat-checkbox (change)="selectToggleAll()" class="inbox-toggle-all mr-1">
 		<small>All</small>
@@ -19,7 +19,7 @@
 	<button mat-raised-button style="color:#3f51b5;"
 		(click)="addRecord()">Add {{ title }}</button>
 </mat-toolbar>
-<mat-toolbar class="search-toolbar">
+<mat-toolbar class="search-toolbar" *ngIf="isSearchable">
 	<!-- Filter by Columns -->
 	<app-search style="width:100%;"
 		[terms]="searchResults"
@@ -32,15 +32,15 @@
 	<div class="Table">
 		<!-- Columns section -->
 		<div class="Table-row Table-header">
-			<span style="padding-left:38px;"></span>
+			<span style="padding-left:38px;" *ngIf="isMultiSelect"></span>
 			<div class="Table-row-item cell" *ngFor="let column of columns">
 				{{ column.name }}
 			</div>
-			<div class="Table-row-item cell">Actions</div>
+			<div class="Table-row-item cell" *ngIf="isEditable || isDeletable">Actions</div>
 		</div>
 		<!-- Body section -->
 		<div class="Table-row" *ngFor="let row of filteredRows">
-			<mat-checkbox class="hidden-on-open mail-check"></mat-checkbox>
+			<mat-checkbox class="hidden-on-open mail-check" *ngIf="isMultiSelect"></mat-checkbox>
 			<div class="Table-row-item data-cell" attr.data-header="{{ column.name }}"
 				*ngFor="let column of columns" [ngSwitch]="column.type">
 				<span *ngSwitchCase="'string'">{{ row[column.attr] }}</span>
@@ -53,10 +53,12 @@
 			<div class="Table-row-item data-cell" style="padding-bottom:0px;padding-top:5px;"
 				data-header="Actions">
 				<button mat-icon-button color="primary"
+					*ngIf="isEditable"
 					(click)="editRecord(row)">
 					<mat-icon>create</mat-icon>
 				</button>
 				<button mat-icon-button color="warn"
+					*ngIf="isDeletable"
 					(click)="deleteRecord(row['toBeDeleted']);">
 					<mat-icon>delete</mat-icon>
 				</button>

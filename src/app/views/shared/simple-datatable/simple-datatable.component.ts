@@ -14,6 +14,18 @@ import { DialogFormService } from '../dialog-form/dialog-form.service';
 export class SimpleDatatableComponent implements OnInit, OnChanges {
 
 	@Input()
+	isSearchable: boolean;
+
+	@Input()
+	isMultiSelect: boolean;
+
+	@Input()
+	isEditable: boolean;
+
+	@Input()
+	isDeletable: boolean;
+
+	@Input()
 	rows: any[];
 
 	@Input()
