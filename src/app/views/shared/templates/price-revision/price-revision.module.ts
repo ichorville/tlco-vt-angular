@@ -21,8 +21,11 @@ import {
 	MatSidenavModule,
 	MatSnackBarModule,
 	MatSelectModule,
-	MatDatepickerModule
+	MatDatepickerModule,
+	MatStepperModule
 } from '@angular/material';
+import { SimpleDatatableModule } from '../../simple-datatable/simple-datatable.module';
+import { AppLoaderModule } from '../../../../services/app-loader/app-loader.module';
 
 import { PriceRevisionComponent } from './price-revision.component';
 
@@ -50,7 +53,10 @@ import { PriceRevisionComponent } from './price-revision.component';
 		MatSidenavModule,
 		MatSnackBarModule,
 		MatSelectModule,
-		MatDatepickerModule
+		MatDatepickerModule,
+		MatStepperModule,
+		SimpleDatatableModule,
+		AppLoaderModule
 	],
 	declarations: [
 		PriceRevisionComponent
