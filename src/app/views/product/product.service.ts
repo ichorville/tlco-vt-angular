@@ -458,24 +458,27 @@ export class ProductService {
         }
     ]; 
 
-    priceRevision = [
+    priceRevision = [   
         {
-            type: 'DPL',
+            order: 1,
+            type: 'MRP',
             children: [
-                { name: '123123' },
-                { name: 'DP' }
+                { name: 'MRP' }
             ]
         },
-        {
+        { 
+            order: 2,
             type: 'RPL',
             children: [
                 { name: 'WSP' }
             ]
         }, 
         {
-            type: 'MRP',
+            order: 3,
+            type: 'DPL',
             children: [
-                { name: 'MRP' }
+                { name: '123123' },
+                { name: 'DP' }
             ]
         }
     ]
