@@ -22,28 +22,42 @@
 	</div>
 	<div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
 		<mat-card>
-			<mat-card-content style="padding: 0 0rem 1.5rem;">
-				<mat-tab-group class="demo-tab-group" style="width: -webkit-fill-available;">
-					<mat-tab label="{{ listItem.type }}" *ngFor="let listItem of priceListItems">
-						<div class="demo-tab-content">
-							<div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
-								<mat-form-field class="full-width" style="padding-top: 10px;">
-									<mat-select placeholder="Price List">
+			<form [formGroup]="priceListForm">
+				<!-- Config Stepper beginning -->
+				<mat-horizontal-stepper 
+					#priceListStepper
+					formArrayName="priceListConfigArray" 
+					[linear]="true">
+		
+					<mat-step
+						*ngFor="let listItem of priceListItems"
+						[formGroupName]="listItem.order - 1" 
+						[stepControl]="priceListConfigArray?.get([listItem.order - 1])">
+						<ng-template matStepLabel>{{ listItem.type }}</ng-template>
+
+						<div fxLayout="row" fxLayoutWrap="wrap">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+								<mat-form-field class="full-width">
+									<mat-select placeholder="Price List" (click)="filterByListType(listItem)">
 										<mat-option *ngFor="let item of listItem.children" [value]="item.name">
 											{{ item.name }}
 										</mat-option>
 									</mat-select>
 								</mat-form-field>
 							</div>
-							<div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
-								<mat-form-field class="full-width" style="padding-top: 10px;">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33">
+								<mat-form-field class="full-width">
 									<input matInput type="number" placeholder="Price">
 								</mat-form-field>
+							</div>	
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33">
 								<mat-form-field class="full-width">
 									<input matInput [matDatepicker]="effectiveDate" placeholder="Effective Date">
 									<mat-datepicker-toggle matSuffix [for]="effectiveDate"></mat-datepicker-toggle>
 									<mat-datepicker #effectiveDate></mat-datepicker>
 								</mat-form-field>
+							</div>	
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33">
 								<mat-form-field class="full-width">
 									<input matInput [matDatepicker]="expiryDate" placeholder="Expiry Date">
 									<mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
@@ -51,9 +65,43 @@
 								</mat-form-field>
 							</div>	
 						</div>
-					</mat-tab>
-				</mat-tab-group>
-			</mat-card-content>
+						
+						<div fxLayout="row" fxLayoutWrap="wrap">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+								<app-simple-datatable
+									*ngIf="loadingCompleted"
+									[rows]="rows"
+									[columns]="columns"
+									(onLoad)="closeLoader($event)"
+									[isEditable]="true">
+								</app-simple-datatable>
+							</div>
+						</div>
+			
+						<!-- Stepper checkbox to indicate form validity: Hidden -->
+						<div fxLayout="row">
+							<button *ngIf="listItem.order != 1" mat-button matStepperPrevious>Back</button>
+							<button mat-button matStepperNext>Next</button>
+							<span style="flex: 1 1 auto;"></span>
+							<mat-checkbox hidden
+								[formControlName]="listItem.order" 
+								[(ngModel)]="priceListEntity[listItem.order]['isCompleted']">
+								Status
+							</mat-checkbox>
+						</div>
+					</mat-step>
+			
+					<!-- Mat stepper navigation buttons -->
+					<mat-step>
+						<ng-template matStepLabel>Done</ng-template>
+						You are now done.
+						<div>
+							<button (click)="onSumit()" mat-button>Done</button>
+						</div>
+					</mat-step>
+		
+				</mat-horizontal-stepper>
+			</form>
 		</mat-card>
 	</div>
 </div>
