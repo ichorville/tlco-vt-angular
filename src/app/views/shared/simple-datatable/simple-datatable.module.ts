@@ -13,7 +13,8 @@ import {
 	MatListModule,
 	MatCheckboxModule,
 	MatTooltipModule,
-	MatChipsModule
+	MatChipsModule, 
+	MatCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -53,7 +54,8 @@ import { SimpleDatatableService } from './simple-datatable.service';
 		PaginationModule,
 		SearchModule,
 		AppConfirmModule,
-		DialogFormModule
+		DialogFormModule,
+		MatCardModule
 	],
 	declarations: [
 		SimpleDatatableComponent
