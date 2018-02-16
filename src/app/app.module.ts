@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Http, HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+// import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 import { rootRouterConfig } from './app.routes';
@@ -41,7 +41,7 @@ export function createTranslateLoader(http: Http) {
 		RoutePartsService,
 		NavigationService,
 		AuthService,
-		{ provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
+		// { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
 	],
 	bootstrap: [
 		AppComponent
