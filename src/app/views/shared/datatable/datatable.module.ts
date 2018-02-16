@@ -12,7 +12,8 @@ import {
 	MatDialogModule,
 	MatListModule,
 	MatCheckboxModule,
-	MatTooltipModule
+	MatTooltipModule,
+	MatExpansionModule
    } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
@@ -39,6 +40,7 @@ import { DatatableService } from './datatable.service';
 		MatListModule,
 		MatCheckboxModule,
 		MatTooltipModule,	
+		MatExpansionModule,
 		FlexLayoutModule,
 		QuillModule,
 		CommonDirectivesModule,

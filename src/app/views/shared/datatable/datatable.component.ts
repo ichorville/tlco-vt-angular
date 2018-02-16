@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, OnDestroy, ViewChild, Input } from '@angu
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from "rxjs/Subscription";
 import { MediaChange, ObservableMedia } from "@angular/flex-layout";
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatExpansionPanel } from '@angular/material';
 
 import { DatatableService } from './datatable.service';
 
@@ -110,5 +110,21 @@ export class DatatableComponent implements OnInit, OnChanges {
 		this.screenSizeWatcher = this.media.subscribe((change: MediaChange) => {
 			this.isMobile = (change.mqAlias == 'xs') || (change.mqAlias == 'sm');
 		});
+	}
+
+	expandPanel(matExpansionPanel: MatExpansionPanel, event: Event) {
+		event.stopPropagation();
+
+		console.log(matExpansionPanel);
+		console.log(event);
+		
+		if (!this._isExpansionIndicator(event.target)) {
+		  matExpansionPanel.close();
+		}
+	}
+
+	private _isExpansionIndicator(target: any): boolean {
+		const expansionIndicatorClass = 'mat-checkbox-inner-container';
+		return (!(target.classList && target.classList.contains(expansionIndicatorClass)));
 	}
 }

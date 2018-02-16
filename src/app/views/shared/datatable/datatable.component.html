@@ -28,7 +28,7 @@
 
 	<div *ngIf="isValid" class="inbox-hold">
 		<!-- Column header -->
-		<mat-toolbar fxHide.lt-sm="true" class="inbox-toolbar" style="border-bottom:1px solid rgba(0, 0, 0, .12);font-size:1.115rem !important;">
+		<mat-toolbar fxHide.lt-sm="true" class="inbox-toolbar" [fxHide.gt-sm]="isMobile" style="border-bottom:1px solid rgba(0, 0, 0, .12);font-size:1.115rem !important;">
 			<div fxFlex="18 1 auto" fxLayout="row">
 				<span style="padding-left:30px;"></span>
 				<!-- (show on close) -->
@@ -98,6 +98,41 @@
 				</div>
 			</mat-list-item>
 		</mat-list>
+
+		<mat-accordion class="example-headers-align">
+			<mat-expansion-panel hideToggle="true" #matExpansionPanel>
+
+				<mat-expansion-panel-header (click)="expandPanel(matExpansionPanel, $event)">
+					<mat-panel-title style="flex-grow: 0;">
+						<mat-checkbox></mat-checkbox>
+					</mat-panel-title>
+					<mat-panel-title>
+						Destination
+					</mat-panel-title>
+					<mat-panel-title>
+						Destination
+					</mat-panel-title>
+					<!-- <mat-panel-title>
+						Destination
+					</mat-panel-title>
+					<mat-panel-title>
+						Destination
+					</mat-panel-title> -->
+					<span fxFlex></span>
+					<mat-icon mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
+					<mat-menu #menu="matMenu">
+						<a mat-menu-item routerLinkActive="active">Add</a>
+						<a mat-menu-item routerLinkActive="active">Edit</a>		
+						<button mat-menu-item>Delete</button>
+					</mat-menu>
+				</mat-expansion-panel-header>
+
+				<!-- Expanded accordion content -->
+				<mat-panel-title>
+					Personal data
+				</mat-panel-title>
+			</mat-expansion-panel>
+		</mat-accordion>
 
 		<!-- Pagintion Row -->
 		<app-pagination *ngIf="isInit"
