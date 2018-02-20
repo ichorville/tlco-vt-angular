@@ -33,6 +33,8 @@ export class DatatableComponent implements OnInit, OnChanges {
 	screenSizeWatcher: Subscription;
 	isSidenavOpen: Boolean = true;
 	selectToggleFlag = false;
+
+	panelOpenState: boolean = false;
   
 	constructor(
 		private router: Router,
@@ -50,6 +52,9 @@ export class DatatableComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.inboxSideNavInit();
+		this.rows.forEach(element => {
+			element['panelOpenState'] = false;
+		});
 		this.searchResults = this.rows;
 		// calculate the no of pagination pages
 		this._ds.getPageCount(this.rows.length).then((pages) => {
@@ -114,17 +119,19 @@ export class DatatableComponent implements OnInit, OnChanges {
 
 	expandPanel(matExpansionPanel: MatExpansionPanel, event: Event) {
 		event.stopPropagation();
-
-		console.log(matExpansionPanel);
-		console.log(event);
-		
 		if (!this._isExpansionIndicator(event.target)) {
-		  matExpansionPanel.close();
+		  	matExpansionPanel.close();
 		}
 	}
 
-	private _isExpansionIndicator(target: any): boolean {
+	private _isExpansionIndicator(target: any): boolean {	
 		const expansionIndicatorClass = 'mat-checkbox-inner-container';
-		return (!(target.classList && target.classList.contains(expansionIndicatorClass)));
+		const expansionMatMenuClass = 'mat-icon';
+
+		if (target.classList && target.classList.contains(expansionIndicatorClass) || target.classList && target.classList.contains(expansionMatMenuClass)) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
