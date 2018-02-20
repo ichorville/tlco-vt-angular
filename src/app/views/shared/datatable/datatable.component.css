@@ -11,3 +11,11 @@
 .mat-expansion-panel-header {
     padding: 0px 18px;
 }
+
+.padding-top {
+  padding-top: 10px;
+}
+
+.margin-top {
+  margin-top: 10px;
+}
