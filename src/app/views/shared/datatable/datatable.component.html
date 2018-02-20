@@ -29,97 +29,46 @@
 	<div *ngIf="isValid" class="inbox-hold">
 		<!-- Column header -->
 		<mat-toolbar fxHide.lt-sm="true" class="inbox-toolbar" [fxHide.gt-sm]="isMobile" style="border-bottom:1px solid rgba(0, 0, 0, .12);font-size:1.115rem !important;">
-			<div fxFlex="18 1 auto" fxLayout="row">
-				<span style="padding-left:30px;"></span>
-				<!-- (show on close) -->
-				<small class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">Column Header</small>
-				<!-- (always show) -->
-				<small>Column Header</small>
-			</div>
-			<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
-			<!-- Single emial date (show on close) -->
-			<small class="hidden-on-open">Column Header</small>
-			<span style="padding-right:30px;"></span>
+			
 		</mat-toolbar>
 
-		<mat-list class="messages">
-			<mat-list-item *ngFor="let message of filteredRows" class="message-item app-accordion">
-				<div fxLayout="row" fxLayoutAlign="start center" class="message-head">
-					<!-- Single email select and star (show on close) -->
-					<mat-checkbox [(ngModel)]="message.selected" class="hidden-on-open mail-check"></mat-checkbox>
-					<!-- Single emial photo and date (show on open) -->
-					<div fxFlex="1 1 auto" fxLayout="row" class="show-on-open mr-1">
-						<img [src]="message.photo" alt="" class="inbox-face mr-1">
-						<div fxLayout="column">
-							<span class="mat-card-title m-0">{{ message.name }}</span>
-							<small class="mat-card-subtitle m-0">{{ message.date | date }}</small>
-						</div>
-					</div>
-					<!-- Single emial name and subject -->
+		<mat-accordion class="example-headers-align">
+			<!-- Expansion panel header -->
+			<mat-expansion-panel hideToggle="true" #matExpansionPanel 
+				*ngFor="let message of filteredRows"
+				(opened)="message.panelOpenState = true"
+				(closed)="message.panelOpenState = false">
+
+				<!-- When header is Closed -->
+				<mat-expansion-panel-header *ngIf="!message.panelOpenState"
+					(click)="expandPanel(matExpansionPanel, $event)">
+					
+					<mat-panel-title style="flex-grow: 0;">
+						<mat-checkbox
+							[ngClass]="{'padding-top': isMobile === true}"
+							[(ngModel)]="message.selected">
+						</mat-checkbox>
+					</mat-panel-title>
+
 					<div appAccordion fxFlex="18 1 auto" fxLayout="row">
-						<!-- (show on close) -->
+
 						<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '120px'}">{{ message.name }}</div>
-						<!-- (always show) -->
-						<div>{{ message.subject }}</div>
+						<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '220px'}">{{ message.subject }}</div>
+
+						<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '220px'}"
+							fxHide [fxHide.gt-sm]="isMobile">{{ message.subject }}</div>
+						<div class="mr-1 hidden-on-open" [ngStyle]="{minWidth: '220px'}"
+							fxHide [fxHide.gt-sm]="isMobile">{{ message.subject }}</div>
 					</div>
 					<span fxFlex fxHide [fxHide.gt-sm]="isMobile"></span>
-					<!-- Single emial date (show on close) -->
-					<small class="hidden-on-open">{{ message.date | date }}</small>
-					<!-- Single emial top Drop down (show on close) -->
-					<button mat-icon-button [matMenuTriggerFor]="msgMenu" class="hidden-on-open">
-						<mat-icon class="text-muted">more_vert</mat-icon>
-					</button>
-					<mat-menu #msgMenu="matMenu">
-						<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/config">Add</a>
-						<a mat-menu-item routerLinkActive="active" routerLink="/{{ url }}/{{ message.id }}/config">Edit</a>		
-						<button mat-menu-item>Delete</button>
-					</mat-menu>
-
-					<!-- Single emial top Icons (show on open) -->
-					<div class="show-on-open">
-						<button mat-icon-button matTooltip="Reply">
-							<mat-icon class="text-muted">reply</mat-icon>
-						</button>
-						<button mat-icon-button matTooltip="Mark as important">
-							<mat-icon class="text-muted">folder_special</mat-icon>
-						</button>
-						<button mat-icon-button matTooltip="Move to archive">
-							<mat-icon class="text-muted">archive</mat-icon>
-						</button>
-						<button mat-icon-button matTooltip="Move to trash">
-							<mat-icon class="text-muted">delete</mat-icon>
-						</button>
-					</div>
-				</div>
-
-				<!-- Single text (show on open) -->
-				<div class="message-content accordion-content">
-					<div class="message-text" [innerHTML]="message.message"></div>
-				</div>
-			</mat-list-item>
-		</mat-list>
-
-		<mat-accordion class="example-headers-align">
-			<mat-expansion-panel hideToggle="true" #matExpansionPanel>
-
-				<mat-expansion-panel-header (click)="expandPanel(matExpansionPanel, $event)">
-					<mat-panel-title style="flex-grow: 0;">
-						<mat-checkbox></mat-checkbox>
-					</mat-panel-title>
-					<mat-panel-title>
-						Destination
-					</mat-panel-title>
-					<mat-panel-title>
-						Destination
-					</mat-panel-title>
-					<!-- <mat-panel-title>
-						Destination
-					</mat-panel-title>
-					<mat-panel-title>
-						Destination
-					</mat-panel-title> -->
-					<span fxFlex></span>
-					<mat-icon mat-icon-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
+					
+					<small class="hidden-on-open" [ngClass]="{'padding-top': isMobile === true}">{{ message.date | date }}</small>
+					<mat-icon 
+						mat-icon-button 
+						[matMenuTriggerFor]="menu"
+						[ngClass]="{'padding-top': isMobile === true}">
+						more_vert
+					</mat-icon>
 					<mat-menu #menu="matMenu">
 						<a mat-menu-item routerLinkActive="active">Add</a>
 						<a mat-menu-item routerLinkActive="active">Edit</a>		
@@ -127,9 +76,41 @@
 					</mat-menu>
 				</mat-expansion-panel-header>
 
+				<!-- When header is Open -->
+				<mat-expansion-panel-header *ngIf="message.panelOpenState"
+					(click)="expandPanel(matExpansionPanel, $event)">
+					
+					<div fxFlex="1 1 auto" fxLayout="row" class="show-on-open mr-1">
+						<img [src]="message.photo" alt="" class="inbox-face mr-1"
+							[ngClass]="{'margin-top': isMobile === true}">
+						<div fxLayout="column" [ngClass]="{'padding-top': isMobile === true}">
+							<span class="mat-card-title m-0">{{ message.name }}</span>
+							<small class="mat-card-subtitle m-0">{{ message.date | date }}</small>
+						</div>
+					</div>
+					<div fxFlex="18 1 auto" fxLayout="row">
+						<div class="mr-1 hidden-on-open" 
+							[ngStyle]="{minWidth: '120px'}"
+							fxHide [fxHide.gt-sm]="isMobile">
+							{{ message.subject }}
+						</div>						
+					</div>
+					<div class="show-on-open">
+						<button mat-icon-button matTooltip="Reply">
+							<mat-icon class="text-muted">reply</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Edit">
+							<mat-icon class="text-muted">create</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Delete">
+							<mat-icon class="text-muted">delete</mat-icon>
+						</button>
+					</div>
+				</mat-expansion-panel-header>
+
 				<!-- Expanded accordion content -->
-				<mat-panel-title>
-					Personal data
+				<mat-panel-title 
+					[innerHTML]="message.message">
 				</mat-panel-title>
 			</mat-expansion-panel>
 		</mat-accordion>
